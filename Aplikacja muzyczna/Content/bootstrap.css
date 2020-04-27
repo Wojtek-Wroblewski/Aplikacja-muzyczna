@@ -3063,14 +3063,7 @@ select[multiple].input-lg {
     top: 0;
   }
 }
-.form-horizontal {
-    background-color: red;
-    width:80%;
-    margin:10px 10% 10px 10%;
 
-    /*TUTAJ*/
-    
-}
 .form-horizontal .radio,
 .form-horizontal .checkbox,
 .form-horizontal .radio-inline,
@@ -3091,7 +3084,7 @@ select[multiple].input-lg {
     .form-horizontal .control-label {
         padding-top: 7px;
         margin-bottom: 0;
-        text-align: right;
+        /*text-align: right;*/
     }
 }
 .form-horizontal .has-feedback .form-control-feedback {

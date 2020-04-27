@@ -1,6 +1,9 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(0,255,255,1) 100%) no-repeat center center fixed;
+    
+    /*KOLORY*/
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -20,5 +23,36 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    
+}
+
+
+.form-horizontal {
+    background: linear-gradient(to bottom, rgba(255,255,0,0.5) 0%, rgba(255,0,255,0.5) 100%);
+    /*background-color: red;*/
+    margin: 10px 10% 10px 10%;
+
+    align-content:center;
+
+    /*KOLORY*/
+}
+
+.form-group {
+    margin: 0px 10% 0px 10%;
+    width: 100%;
+}
+.form-control {
+    margin: 0px 10% 0px 10%;
+    width: 80%;
+    border-radius: 15px;
+}
+.control-label {
+    margin: 0px 10% 0px 10%;
+    width: 80%;
+    text-align:center;
+}
+ 
+.btn-default{
+    margin:10px;
+    border-radius:15px;
 }
