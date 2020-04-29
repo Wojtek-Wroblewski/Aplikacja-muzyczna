@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Aplikacja_muzyczna.Models;
 
 namespace Aplikacja_muzyczna.Controllers
 {
@@ -15,7 +16,7 @@ namespace Aplikacja_muzyczna.Controllers
         }
 
         // GET: Artysta/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details()
         {
             return View();
         }
@@ -28,62 +29,45 @@ namespace Aplikacja_muzyczna.Controllers
 
         // POST: Artysta/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(DodajArtysta model)
         {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
+            
                 return View();
-            }
         }
 
         // GET: Artysta/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
             return View();
         }
 
         // POST: Artysta/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(DodajArtysta model)
         {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
                 return View();
-            }
         }
 
         // GET: Artysta/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete()
         {
             return View();
         }
 
         // POST: Artysta/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(DodajArtysta model)
         {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
                 return View();
-            }
         }
+
+
+
+        public ActionResult Dupa()
+        {
+            
+                return View();
+        }
+
     }
 }

@@ -23,6 +23,7 @@ namespace Aplikacja_muzyczna.Models
         [Display(Name = "Dodatkowe informacje (np. wykonywane gatunki)")]
         public string Uwaga { get; set; }
         public HttpPostedFileBase UserProfilePicture { get; set; }
+        [Key]
         public int ArtId { get; set; }
 
     }
@@ -49,7 +50,7 @@ namespace Aplikacja_muzyczna.Models
 
     }
 
-    public class edytujArtysta
+    public class EdytujArtysta
     {
 
         [Display(Name = "Podaj nazwisko lub nazwę zespołu")]
