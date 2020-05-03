@@ -2,72 +2,56 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Drawing;
+using System.Text;
 using System.Web;
 
 namespace Aplikacja_muzyczna.Models
 {
-    public class DodajArtysta
+    public class AddArtist
     {
 
-        [Display(Name = "Podaj nazwisko lub nazwę zespołu")]
-        [Required(ErrorMessage = "Pole nie może być puste")]
-        public string Nazwa1 { get; set; }
-        [Display(Name = "Podaj imię lub skrót od nazwy zespołu")]
-        public string Nazwa2 { get; set; }
-        [Display(Name = "Podaj datę urodzenia artysty/najmłodszego członka")]
-        [Required(ErrorMessage = "Pole nie może być puste")]
+        [Display(Name = "Insert surname")]
+        [Required(ErrorMessage = "Field can't be empty")]
+        public string Surname { get; set; }
+        [Display(Name = "Insert First name")]
+        public string Firstname { get; set; }
+        [Display(Name = "Insert birth date/date of est")]
+        [Required(ErrorMessage = "Field can't be empty")]
         [DataType(DataType.Date)]
-        public DateTimeOffset DataUr { get; set; }
-        [Display(Name = "Wybierz zdjęcie")]
-        public byte[] Zdj { get; set; }
-        [Display(Name = "Dodatkowe informacje (np. wykonywane gatunki)")]
-        public string Uwaga { get; set; }
-        public HttpPostedFileBase UserProfilePicture { get; set; }
+        public DateTimeOffset Birthdate { get; set; }
+        [Display(Name = "Choose photo")]
+        public byte[] Photo { get; set; }
+        [Display(Name = "Additional info")]
+        public string AdditionalInfo { get; set; }
+        public HttpPostedFileBase File { get; set; }
         [Key]
         public int ArtId { get; set; }
 
     }
+    
+    public class ArtFunction
+    { 
 
-    public class WyświetlArtysta
-    {
+        public static byte[] PhotoBytefromfile(HttpPostedFileBase File)
+        {
 
-        [Display(Name = "Podaj nazwisko lub nazwę zespołu")]
-        [Required(ErrorMessage = "Pole nie może być puste")]
-        public string Nazwa1 { get; set; }
-        [Display(Name = "Podaj imię lub skrót od nazwy zespołu")]
-        public string Nazwa2 { get; set; }
-        [Display(Name = "Podaj datę urodzenia artysty/najmłodszego członka")]
-        [Required(ErrorMessage = "Pole nie może być puste")]
-        [DataType(DataType.Date)]
-        public DateTimeOffset DataUr { get; set; }
-        [Display(Name = "Wybierz zdjęcie")]
-        public byte[] Zdj { get; set; }
-        [Display(Name = "Dodatkowe informacje (np. wykonywane gatunki)")]
-        public string Uwaga { get; set; }
-        public HttpPostedFileBase UserProfilePicture { get; set; }
-        [Key]
-        public int ArtId { get; set; }
+            if (File.ContentLength > (4 * 1024 * 1024))
+            {
+                string S = "S'";
+                return Encoding.ASCII.GetBytes(S);
+            }
+            if (!(File.ContentType == "image/*"))
+            {
+                string F = "F'";
+                return Encoding.ASCII.GetBytes(F);
+            }
+            byte[] data = new byte[File.ContentLength];
+            File.InputStream.Read(data, 0, File.ContentLength);
 
-    }
+            return data;
+        }
 
-    public class EdytujArtysta
-    {
 
-        [Display(Name = "Podaj nazwisko lub nazwę zespołu")]
-        [Required(ErrorMessage = "Pole nie może być puste")]
-        public string Nazwa1 { get; set; }
-        [Display(Name = "Podaj imię lub skrót od nazwy zespołu")]
-        public string Nazwa2 { get; set; }
-        [Display(Name = "Podaj datę urodzenia artysty/najmłodszego członka")]
-        [Required(ErrorMessage = "Pole nie może być puste")]
-        [DataType(DataType.Date)]
-        public DateTimeOffset DataUr { get; set; }
-        [Display(Name = "Wybierz zdjęcie")]
-        public byte[] Zdj { get; set; }
-        [Display(Name = "Dodatkowe informacje (np. wykonywane gatunki)")]
-        public string Uwaga { get; set; }
-        public HttpPostedFileBase UserProfilePicture { get; set; }
-        public int ArtId { get; set; }
 
     }
 

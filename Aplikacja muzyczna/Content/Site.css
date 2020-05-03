@@ -42,16 +42,16 @@ textarea {
     margin:0 0 15px 0;
 }
 .form-control {
-    margin-top: 0px;
-    margin-left: 0px;
-    margin-right: 0px;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
     width: 100%;
     border-radius: 15px;
 }
 .control-label {
-    margin-top: 0px;
-    margin-left: 0px;
-    margin-right: 0px;  
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;  
     width: 100%;
     text-align: center;
 }
@@ -84,3 +84,25 @@ dd {
     padding: 5px;
     margin: 0
 }
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+    .inputfile + label {
+        font-size: 1.25em;
+        font-weight: 700;
+        color: white;
+        background-color: rgba(255,255,255,0.1);
+        display: inline-block;
+    }
+
+        .inputfile:focus + label,
+        .inputfile + label:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
