@@ -6,78 +6,67 @@
 
 <h2>Delete</h2>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>DodajArtysta</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-		<div class="row">
-            @Html.LabelFor(model => model.Nazwa1, htmlAttributes: new { @class = "control-label col-md-2" })
-		</div>
-		<div class="row">
-            <div class="col-md-2">
-		</div>
-                <div class="col-md-8">
-                @Html.EditorFor(model => model.Nazwa1, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nazwa1, "", new { @class = "text-danger" })
-            </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-		<div class="row">
-            @Html.LabelFor(model => model.Nazwa2, htmlAttributes: new { @class = "control-label col-md-2" })
-		</div>
-		<div class="row">
-            <div class="col-md-2">
-		</div>
-                <div class="col-md-8">
-                @Html.EditorFor(model => model.Nazwa2, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nazwa2, "", new { @class = "text-danger" })
-            </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-		<div class="row">
-            @Html.LabelFor(model => model.DataUr, htmlAttributes: new { @class = "control-label col-md-2" })
-		</div>
-		<div class="row">
-            <div class="col-md-2">
-		</div>
-                <div class="col-md-8">
-                @Html.EditorFor(model => model.DataUr, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DataUr, "", new { @class = "text-danger" })
-            </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-		<div class="row">
-            @Html.LabelFor(model => model.Uwaga, htmlAttributes: new { @class = "control-label col-md-2" })
-		</div>
-		<div class="row">
-            <div class="col-md-2">
-		</div>
-                <div class="col-md-8">
-                @Html.EditorFor(model => model.Uwaga, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Uwaga, "", new { @class = "text-danger" })
-            </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-10 col-md-2">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
+<h3>Are you sure you want to delete this?</h3>
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <h4>DodajArtysta</h4>
+    <hr />
+    <div class="form-horizontal">
+
+        <div class="row">
+            <div class="col-sm-5" style="margin:10px 0 5px 20px; font-weight:bold;">
+            @Html.DisplayNameFor(model => model.Nazwa1)
+            </div>
+
+            <div class="col-sm-6" style="margin:10px 0 5px 20px;"> 
+            Html.DisplayFor(model => model.Nazwa1)
+			</div>
+		</div>
+
+        <div class="row">
+            <div class="col-sm-5" style="margin:10px 0 5px 20px; font-weight:bold;">
+            @Html.DisplayNameFor(model => model.Nazwa2)
+            </div>
+
+            <div class="col-sm-6" style="margin:10px 0 5px 20px;"> 
+            Html.DisplayFor(model => model.Nazwa2)
+			</div>
+		</div>
+
+        <div class="row">
+            <div class="col-sm-5" style="margin:10px 0 5px 20px; font-weight:bold;">
+            @Html.DisplayNameFor(model => model.DataUr)
+            </div>
+
+            <div class="col-sm-6" style="margin:10px 0 5px 20px;"> 
+            @Html.DisplayFor(model => model.DataUr)
+			</div>
+		</div>
+
+        <div class="row">
+            <div class="col-sm-5" style="margin:10px 0 5px 20px; font-weight:bold;">
+            @Html.DisplayNameFor(model => model.Uwaga)
+            </div>
+
+            <div class="col-sm-6" style="margin:10px 0 5px 20px;"> 
+            @Html.DisplayFor(model => model.Uwaga)
+			</div>
+		</div>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color container-fluid">
+            <div class="row">
+                <div class="col-xs-2" style=" margin:15px 0 5px 20px; padding:0;">
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+                <div class="col-xs-6"></div>
+                    <div class="col-xs-2">
+                        <input type="submit" value="Delete" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+    }
+	
+    </div>
 </div>
