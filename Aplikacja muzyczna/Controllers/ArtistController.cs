@@ -58,8 +58,9 @@ namespace Aplikacja_muzyczna.Controllers
                         ModelState.AddModelError("CustomError", "Something went wrong");
                         return View();
                     }
-                    Add.SaveArtisttoDB(model);
                 }
+                    var dupa =Add.SaveArtisttoDB(model);
+                    var d = dupa;
             }
                 return View();
         }

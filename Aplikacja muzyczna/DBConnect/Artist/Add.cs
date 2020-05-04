@@ -22,7 +22,7 @@ namespace Aplikacja_muzyczna.DBConnect.Artist
 
             };
             // string sql = @"insert into dbo.Artysta (Nazwa1, Nazwa2, DataNajmłodszego, Uwaga, Zdjęcie, ZdjęcieString) values (@Nazwa1, @Nazwa2, @DataNajmłodszego, @Uwaga, @Zdjęcie, @ZdjęcieString);";
-            string sql = @"insert into dbo.Artysci (Surname, Firstname, Photo, AdditionalInfo, Birthdate) values (@Surname, @Firstname, @Photo, @AdditionalInfo, @Birthdate);";
+            string sql = @"insert into dbo.Artist (Surname, Firstname, Photo, AdditionalInfo, Birthdate) values (@Surname, @Firstname, @Photo, @AdditionalInfo, @Birthdate);";
 
             return DataAccess.SaveData(sql, data);
         }

@@ -13,10 +13,9 @@ namespace Aplikacja_muzyczna.DBConnect
     public class DataAccess
     {
 
-        public static string GetConnectionString(string connectionName = "Aplikacja muzyczna")
+        public static string GetConnectionString(string connectionName = "DefaultConnection")
         {
-            return "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=aspnet - Aplikacja muzyczna - 20200427042437;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
+            return "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog= aspnet-Aplikacja muzyczna-20200427042437 ;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         }
 
         public static List<T> LoadData<T>(string sql)
