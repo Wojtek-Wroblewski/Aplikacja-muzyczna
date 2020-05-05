@@ -15,7 +15,7 @@ namespace Aplikacja_muzyczna.Models
         public string Surname { get; set; }
         [Display(Name = "Insert First name")]
         public string Firstname { get; set; }
-        [Display(Name = "Insert birth date/date of est")]
+        [Display(Name = "Insert birth date or date of established")]
         [Required(ErrorMessage = "Field can't be empty")]
         [DataType(DataType.Date)]
         public DateTimeOffset Birthdate { get; set; }
@@ -28,7 +28,28 @@ namespace Aplikacja_muzyczna.Models
         public int ArtId { get; set; }
 
     }
-    
+
+    public class DetailArtist
+    {
+
+        [Display(Name = "Surname")]
+        public string Surname { get; set; }
+        [Display(Name = "First name")]
+        public string Firstname { get; set; }
+        [Display(Name = "Birth date or date of established")]
+        [DataType(DataType.Date)]
+        public DateTimeOffset Birthdate { get; set; }
+        [Display(Name = "Photo")]
+        public byte[] Photo { get; set; }
+        [Display(Name = "Additional info")]
+        public string AdditionalInfo { get; set; }
+        public HttpPostedFileBase File { get; set; }
+        [Key]
+        public int ArtId { get; set; }
+
+    }
+
+
     public class ArtFunction
     { 
 
@@ -37,12 +58,14 @@ namespace Aplikacja_muzyczna.Models
 
             if (File.ContentLength > (4 * 1024 * 1024))
             {
-                string S = "S'";
+                string S = "S";
                 return Encoding.ASCII.GetBytes(S);
             }
-            if (!(File.ContentType == "image/*"))
+            
+            if (!File.ContentType.Contains("image/"))
+
             {
-                string F = "F'";
+                string F = "F";
                 return Encoding.ASCII.GetBytes(F);
             }
             byte[] data = new byte[File.ContentLength];

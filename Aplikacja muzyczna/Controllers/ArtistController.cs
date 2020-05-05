@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Aplikacja_muzyczna.Models;
 using Aplikacja_muzyczna.DBConnect.Artist;
+using AutoMapper;
+using AutoMapper.Configuration;
 
 namespace Aplikacja_muzyczna.Controllers
 {
@@ -17,9 +19,12 @@ namespace Aplikacja_muzyczna.Controllers
         }
 
         // GET: Artysta/Details/5
-        public ActionResult Details()
+        public ActionResult Details(DetailArtist model)
         {
-            return View();
+
+            DetailArtist temp = TempData["JustAddedArtist"] as DetailArtist;
+            model = temp;
+            return View(model);
         }
 
         // GET: Artysta/Create
@@ -41,7 +46,7 @@ namespace Aplikacja_muzyczna.Controllers
                     model.Photo = ArtFunction.PhotoBytefromfile(file);
                     if (model.Photo.Length == 1)
                     {
-                        if (model.Photo.ToString() == "s")
+                        if (model.Photo.ToString() == "S")
                         {
 
                             ModelState.AddModelError("CustomError", "File to large");
@@ -59,8 +64,17 @@ namespace Aplikacja_muzyczna.Controllers
                         return View();
                     }
                 }
-                    var dupa =Add.SaveArtisttoDB(model);
-                    var d = dupa;
+                Add.SaveArtisttoDB(model);
+
+
+
+
+                var ConfigAddtoDetail = new MapperConfiguration(cfg => cfg.CreateMap<AddArtist, DetailArtist>());
+                var MapAddtoDetail = ConfigAddtoDetail.CreateMapper();
+                var modelDetail = MapAddtoDetail.Map<DetailArtist>(model);
+                TempData["JustAddedArtist"]= modelDetail;
+
+                return RedirectToAction("Details");
             }
                 return View();
         }
