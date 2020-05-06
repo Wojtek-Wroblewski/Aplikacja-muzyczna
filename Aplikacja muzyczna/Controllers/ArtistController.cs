@@ -21,9 +21,11 @@ namespace Aplikacja_muzyczna.Controllers
         // GET: Artysta/Details/5
         public ActionResult Details(DetailArtist model)
         {
+            if (TempData["JustAddedArtist"] != null)
+            {
+                model = TempData["JustAddedArtist"] as DetailArtist;
+            }
 
-            DetailArtist temp = TempData["JustAddedArtist"] as DetailArtist;
-            model = temp;
             return View(model);
         }
 
@@ -64,11 +66,8 @@ namespace Aplikacja_muzyczna.Controllers
                         return View();
                     }
                 }
+
                 Add.SaveArtisttoDB(model);
-
-
-
-
                 var ConfigAddtoDetail = new MapperConfiguration(cfg => cfg.CreateMap<AddArtist, DetailArtist>());
                 var MapAddtoDetail = ConfigAddtoDetail.CreateMapper();
                 var modelDetail = MapAddtoDetail.Map<DetailArtist>(model);
