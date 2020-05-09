@@ -33,11 +33,13 @@ namespace Aplikacja_muzyczna.Models
     {
 
         [Display(Name = "Surname")]
+        [Required(ErrorMessage = "Field can't be empty")]
         public string Surname { get; set; }
         [Display(Name = "First name")]
         public string Firstname { get; set; }
         [Display(Name = "Birth date or date of established")]
         [DataType(DataType.Date)]
+        [Required(ErrorMessage = "Field can't be empty")]
         public DateTimeOffset Birthdate { get; set; }
         [Display(Name = "Photo")]
         public byte[] Photo { get; set; }
@@ -48,34 +50,6 @@ namespace Aplikacja_muzyczna.Models
         public int ArtId { get; set; }
 
     }
-
-
-    public class ArtFunction
-    { 
-
-        public static byte[] PhotoBytefromfile(HttpPostedFileBase File)
-        {
-
-            if (File.ContentLength > (4 * 1024 * 1024))
-            {
-                string S = "S";
-                return Encoding.ASCII.GetBytes(S);
-            }
-            
-            if (!File.ContentType.Contains("image/"))
-
-            {
-                string F = "F";
-                return Encoding.ASCII.GetBytes(F);
-            }
-            byte[] data = new byte[File.ContentLength];
-            File.InputStream.Read(data, 0, File.ContentLength);
-
-            return data;
-        }
-
-
-
-    }
+    
 
 }

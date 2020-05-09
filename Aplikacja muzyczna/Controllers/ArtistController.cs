@@ -7,6 +7,7 @@ using Aplikacja_muzyczna.Models;
 using Aplikacja_muzyczna.DBConnect.Artist;
 using AutoMapper;
 using AutoMapper.Configuration;
+using Aplikacja_muzyczna.Functions;
 
 namespace Aplikacja_muzyczna.Controllers
 {
@@ -21,10 +22,16 @@ namespace Aplikacja_muzyczna.Controllers
         // GET: Artysta/Details/5
         public ActionResult Details(DetailArtist model)
         {
+
+            int ArtId = (int)Double.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
+            model = DetailArtistDB.DetailFromId(ArtId); 
+
             if (TempData["JustAddedArtist"] != null)
             {
                 model = TempData["JustAddedArtist"] as DetailArtist;
+                TempData.Remove("JustAddedArtist");
             }
+            
 
             return View(model);
         }
@@ -37,7 +44,7 @@ namespace Aplikacja_muzyczna.Controllers
 
         // POST: Artysta/Create
         [HttpPost]
-        public ActionResult Create(AddArtist model, HttpPostedFileBase file)
+        public ActionResult Create(Models.AddArtist model, HttpPostedFileBase file)
         {
             model.File = file;
             if (ModelState.IsValid)
@@ -45,7 +52,7 @@ namespace Aplikacja_muzyczna.Controllers
 
                 if (model.File != null)
                 {
-                    model.Photo = ArtFunction.PhotoBytefromfile(file);
+                    model.Photo = ArtistFunction.PhotoBytefromfile(file);
                     if (model.Photo.Length == 1)
                     {
                         if (model.Photo.ToString() == "S")
@@ -67,8 +74,8 @@ namespace Aplikacja_muzyczna.Controllers
                     }
                 }
 
-                Add.SaveArtisttoDB(model);
-                var ConfigAddtoDetail = new MapperConfiguration(cfg => cfg.CreateMap<AddArtist, DetailArtist>());
+                AddArtistDB.SaveArtisttoDB(model);
+                var ConfigAddtoDetail = new MapperConfiguration(cfg => cfg.CreateMap<Models.AddArtist, DetailArtist>());
                 var MapAddtoDetail = ConfigAddtoDetail.CreateMapper();
                 var modelDetail = MapAddtoDetail.Map<DetailArtist>(model);
                 TempData["JustAddedArtist"]= modelDetail;
@@ -82,14 +89,28 @@ namespace Aplikacja_muzyczna.Controllers
         public ActionResult Edit()
         {
 
-            return View();
+
+            int ArtId = (int)Double.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
+            
+            DetailArtist model = DetailArtistDB.DetailFromId(ArtId);
+
+            return View(model);
         }
 
         // POST: Artysta/Edit/5
         [HttpPost]
-        public ActionResult Edit(AddArtist model)
+        public ActionResult Edit(DetailArtist model, HttpPostedFileBase file)
         {
-                return View();
+
+            int ArtId = (int)Double.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
+            model.ArtId = ArtId;
+            DetailArtist Updatedmodel = new DetailArtist();
+            Updatedmodel = EditArtistDB.EditArtist(model);
+            if (model!= Updatedmodel)
+            {
+                return RedirectToAction("Details");
+            }
+            return View();
         }
 
         // GET: Artysta/Delete/5
@@ -100,7 +121,7 @@ namespace Aplikacja_muzyczna.Controllers
 
         // POST: Artysta/Delete/5
         [HttpPost]
-        public ActionResult Delete(AddArtist model)
+        public ActionResult Delete(Models.AddArtist model)
         {
                 return View();
         }
@@ -108,7 +129,19 @@ namespace Aplikacja_muzyczna.Controllers
         
         public ActionResult List()
         {
-            return View();
+
+            List<DetailArtist> List = new List<DetailArtist>();
+            List = ListingArtistDB.SelectAll();
+
+            return View(List);
+        }
+        [HttpPost]
+        public ActionResult List(List<DetailArtist> Lista)
+        {
+
+
+
+            return View(Lista);
         }
 
     }

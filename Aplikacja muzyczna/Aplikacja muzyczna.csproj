@@ -176,8 +176,12 @@
     <Compile Include="Controllers\ArtistController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="DBConnect\Artist\Add.cs" />
+    <Compile Include="DBConnect\Artist\AddArtistDB.cs" />
+    <Compile Include="DBConnect\Artist\DetailArtistDB.cs" />
+    <Compile Include="DBConnect\Artist\EditArtistDB.cs" />
+    <Compile Include="DBConnect\Artist\ListingArtistDB.cs" />
     <Compile Include="DBConnect\DataAccess.cs" />
+    <Compile Include="Functions\ArtistFunction.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -256,6 +260,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Artist\Create.cshtml" />
     <Content Include="Views\Artist\Details.cshtml" />
+    <Content Include="Views\Artist\List.cshtml" />
+    <Content Include="Views\Artist\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

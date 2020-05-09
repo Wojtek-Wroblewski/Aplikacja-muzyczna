@@ -8,7 +8,7 @@ using System.Web.Helpers;
 
 namespace Aplikacja_muzyczna.DBConnect.Artist
 {
-    public static class Add
+    public static class AddArtistDB
     {
         public static int SaveArtisttoDB(AddArtist model)
         {

@@ -64,7 +64,7 @@
                     ms.Write(photo, 0, photo.Length);
                     string imageBase64 = Convert.ToBase64String(ms.ToArray());
                     imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
-                    <img src="@imageSrc" alt="@Model.Surname @Model.Firstname" style="border:0;width:100%" />
+                    <img src="@imageSrc" alt="@Model.Surname @Model.Firstname" style="border:0;width:80%; margin:30px 10% 0 10%;" />
                     }
                 }
             </div>
