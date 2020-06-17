@@ -89,21 +89,29 @@ namespace Aplikacja_muzyczna.Controllers
         public ActionResult Edit()
         {
 
+            if (Url.RequestContext.RouteData.Values["id"] != null)
+            {
 
-            int ArtId = (int)Double.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
-            
-            DetailArtist model = DetailArtistDB.DetailFromId(ArtId);
+                int ArtId = (int)Double.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
+                DetailArtist model = DetailArtistDB.DetailFromId(ArtId);
+                return View(model);
 
-            return View(model);
+            }
+            else
+            {
+                return RedirectToAction("List");
+            }
         }
 
         // POST: Artysta/Edit/5
         [HttpPost]
         public ActionResult Edit(DetailArtist model, HttpPostedFileBase file)
         {
-
-            int ArtId = (int)Double.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
-            model.ArtId = ArtId;
+            if (Url.RequestContext.RouteData.Values["id"] != null)
+            {
+                int ArtId = (int)Double.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
+                model.ArtId = ArtId;
+            }
             DetailArtist Updatedmodel = new DetailArtist();
             Updatedmodel = EditArtistDB.EditArtist(model);
             if (model!= Updatedmodel)
@@ -123,7 +131,7 @@ namespace Aplikacja_muzyczna.Controllers
         [HttpPost]
         public ActionResult Delete(Models.AddArtist model)
         {
-                return View();
+            return RedirectToAction("List");
         }
 
         

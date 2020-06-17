@@ -66,10 +66,10 @@ namespace Aplikacja_muzyczna.Functions
             
                 if (UpdatedModel.Photo != Oldmodel.Photo)
                 {
-                    sql += "Surname = @Surname, ";
+                    sql += "Photo = @Photo, ";
                 }
-
-            sql += "Where Art = @ArtId ";
+            sql = sql.Remove(sql.Length - 2, 2);
+            sql += "  Where ArtId = @ArtId ";
 
 
             return sql;
