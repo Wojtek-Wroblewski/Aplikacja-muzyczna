@@ -15,7 +15,7 @@ namespace Aplikacja_muzyczna.Functions
         public static byte[] PhotoBytefromfile(HttpPostedFileBase File)
         {
 
-            if (File.ContentLength > (4 * 1024 * 1024))
+            if (File.ContentLength > (1 * 1024 * 1024))
             {
                 string S = "S";
                 return Encoding.ASCII.GetBytes(S);

@@ -23,14 +23,16 @@ namespace Aplikacja_muzyczna.Controllers
         public ActionResult Details(DetailArtist model)
         {
 
-            int ArtId = (int)Double.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
-            model = DetailArtistDB.DetailFromId(ArtId); 
-
             if (TempData["JustAddedArtist"] != null)
             {
                 model = TempData["JustAddedArtist"] as DetailArtist;
                 TempData.Remove("JustAddedArtist");
+            }else
+            { 
+            int ArtId = (int)Double.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
+            model = DetailArtistDB.DetailFromId(ArtId);
             }
+            
             
 
             return View(model);
@@ -52,26 +54,16 @@ namespace Aplikacja_muzyczna.Controllers
 
                 if (model.File != null)
                 {
-                    model.Photo = ArtistFunction.PhotoBytefromfile(file);
-                    if (model.Photo.Length == 1)
-                    {
-                        if (model.Photo.ToString() == "S")
-                        {
+                    
+                    var Temp = new Tuple<string, byte[]>(null, null);
 
-                            ModelState.AddModelError("CustomError", "File to large");
-                            return View();
-                        }
-                        else if (model.Photo.ToString() == "F")
-                        {
-                            ModelState.AddModelError("CustomError", "Bad format ");
-                            return View();
-                        }
-                    }
-                    else if (model.Photo.Length == 0)
-                    {
-                        ModelState.AddModelError("CustomError", "Something went wrong");
+                    Temp = AddPhoto( model.File);
+                    if (Temp.Item1 != null)
+                    { 
+                    ModelState.AddModelError("", Temp.Item1);
                         return View();
                     }
+                    model.Photo = Temp.Item2;
                 }
 
                 AddArtistDB.SaveArtisttoDB(model);
@@ -146,11 +138,35 @@ namespace Aplikacja_muzyczna.Controllers
         [HttpPost]
         public ActionResult List(List<DetailArtist> Lista)
         {
-
-
-
             return View(Lista);
         }
+
+
+        public static Tuple<string, byte[]> AddPhoto ( HttpPostedFileBase File)
+        {
+            byte[] Photo;
+            string Error = null;
+            Photo = ArtistFunction.PhotoBytefromfile(File);
+            if (Photo.Length == 1)
+            {
+                if (Photo.ToString()[0] == 'S')
+                {
+                    Error = "File to large";
+                }
+                else if (Photo.ToString()[0] =='F')
+                {
+                    Error = "Wrong file format";
+                }
+            }
+            else if (Photo.Length == 0)
+            {
+                Error = "Something went wrong";
+            }
+
+            return new Tuple <string,byte[]> (Error,Photo);
+
+        }
+
 
     }
 }
