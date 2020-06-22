@@ -15,7 +15,7 @@ namespace Aplikacja_muzyczna.Functions
         public static byte[] PhotoBytefromfile(HttpPostedFileBase File)
         {
 
-            if (File.ContentLength > (1 * 1024 * 1024))
+            if (File.ContentLength > (2 * 1024 * 1024))
             {
                 string S = "S";
                 return Encoding.ASCII.GetBytes(S);
@@ -36,43 +36,66 @@ namespace Aplikacja_muzyczna.Functions
         }
 
 
-        public static string ModifyArtistSring(DetailArtist UpdatedModel)
+        public static string ModifyArtistSring(DetailArtist NewModel, DetailArtist Oldmodel)
         {
 
-            DetailArtist Oldmodel = DetailArtistDB.DetailFromId(UpdatedModel.ArtId);
-
             string sql = @"UPDATE dbo.Artist Set ";
-            if (UpdatedModel.Firstname != null)
-                if (UpdatedModel.Firstname != Oldmodel.Firstname)
+            if (NewModel.Firstname != null)
+                if (NewModel.Firstname != Oldmodel.Firstname)
                 {
                     sql += "Firstname = @Firstname, ";
                 }
             
-                if (UpdatedModel.Surname != Oldmodel.Surname)
+                if (NewModel.Surname != Oldmodel.Surname)
                 {
                     sql += "Surname = @Surname, ";
                 }
 
-            if (UpdatedModel.Birthdate != null)
-                if (UpdatedModel.Birthdate != Oldmodel.Birthdate)
+            if (NewModel.Birthdate != null)
+                if (NewModel.Birthdate != Oldmodel.Birthdate)
                 {
                     sql += "Birthdate = @Birthdate, ";
                 }
 
-                if (UpdatedModel.AdditionalInfo != Oldmodel.AdditionalInfo)
+                if (NewModel.AdditionalInfo != Oldmodel.AdditionalInfo)
                 {
                     sql += "AdditionalInfo = @AdditionalInfo, ";
                 }
             
-                if (UpdatedModel.Photo != Oldmodel.Photo)
+                if (NewModel.Photo != Oldmodel.Photo)
                 {
                     sql += "Photo = @Photo, ";
                 }
             sql = sql.Remove(sql.Length - 2, 2);
-            sql += "  Where ArtId = @ArtId ";
+            sql += "  Where ArtId = @ArtId; ";
 
 
             return sql;
+        }
+
+        public static Tuple< byte[],string> VerifyPhoto(HttpPostedFileBase File)     
+        {
+            byte[] Photo;
+            string Error = null;
+            Photo = ArtistFunction.PhotoBytefromfile(File);
+            if (Photo.Length == 1)
+            {
+                if (Photo.ToString()[0] == 'S')
+                {
+                    Error = "File to large";
+                }
+                else if (Photo.ToString()[0] == 'F')
+                {
+                    Error = "Wrong file format";
+                }
+            }
+            else if (Photo.Length == 0)
+            {
+                Error = "Something went wrong";
+            }
+
+            return new Tuple<byte[],string>(Photo,Error);
+
         }
     }
 }

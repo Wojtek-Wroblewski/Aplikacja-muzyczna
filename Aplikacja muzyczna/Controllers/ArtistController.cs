@@ -27,13 +27,12 @@ namespace Aplikacja_muzyczna.Controllers
             {
                 model = TempData["JustAddedArtist"] as DetailArtist;
                 TempData.Remove("JustAddedArtist");
-            }else
-            { 
-            int ArtId = (int)Double.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
-            model = DetailArtistDB.DetailFromId(ArtId);
             }
-            
-            
+            else
+            { 
+                int ArtId = (int)Double.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
+                model = DetailArtistDB.DetailFromId(ArtId);
+            }
 
             return View(model);
         }
@@ -51,33 +50,28 @@ namespace Aplikacja_muzyczna.Controllers
             model.File = file;
             if (ModelState.IsValid)
             {
-
                 if (model.File != null)
                 {
-                    
-                    var Temp = new Tuple<string, byte[]>(null, null);
-
-                    Temp = AddPhoto( model.File);
-                    if (Temp.Item1 != null)
+                    var Photo_error = new Tuple< byte[],string>(null, null);
+                    Photo_error = ArtistFunction.VerifyPhoto( model.File);
+                    if (Photo_error.Item1 != null)
                     { 
-                    ModelState.AddModelError("", Temp.Item1);
+                    ModelState.AddModelError("", Photo_error.Item2);
                         return View();
                     }
-                    model.Photo = Temp.Item2;
+                    model.Photo = Photo_error.Item1;
                 }
-
                 AddArtistDB.SaveArtisttoDB(model);
                 var ConfigAddtoDetail = new MapperConfiguration(cfg => cfg.CreateMap<Models.AddArtist, DetailArtist>());
                 var MapAddtoDetail = ConfigAddtoDetail.CreateMapper();
                 var modelDetail = MapAddtoDetail.Map<DetailArtist>(model);
-                TempData["JustAddedArtist"]= modelDetail;
-
+                TempData["JustAddedArtist"] = modelDetail;
                 return RedirectToAction("Details");
             }
                 return View();
         }
 
-        // GET: Artysta/Edit/5
+        // GET: Artysta/Edit
         public ActionResult Edit()
         {
 
@@ -95,7 +89,7 @@ namespace Aplikacja_muzyczna.Controllers
             }
         }
 
-        // POST: Artysta/Edit/5
+        // POST: Artysta/Edit
         [HttpPost]
         public ActionResult Edit(DetailArtist model, HttpPostedFileBase file)
         {
@@ -104,22 +98,36 @@ namespace Aplikacja_muzyczna.Controllers
                 int ArtId = (int)Double.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
                 model.ArtId = ArtId;
             }
-            DetailArtist Updatedmodel = new DetailArtist();
-            Updatedmodel = EditArtistDB.EditArtist(model);
-            if (model!= Updatedmodel)
+
+            if (model.File != null)
+            {
+                var Photo_error = new Tuple<byte[], string>(null, null);
+                Photo_error = ArtistFunction.VerifyPhoto(model.File);
+                if (Photo_error.Item1 != null)
+                {
+                    ModelState.AddModelError("", Photo_error.Item2);
+                    return View();
+                }
+                model.Photo = Photo_error.Item1;
+            }
+
+
+            DetailArtist NewModelfromDB = new DetailArtist();
+            NewModelfromDB = EditArtistDB.EditArtist(model);
+            if (model== NewModelfromDB)
             {
                 return RedirectToAction("Details");
             }
             return View();
         }
 
-        // GET: Artysta/Delete/5
+        // GET: Artysta/Delete
         public ActionResult Delete()
         {
             return View();
         }
 
-        // POST: Artysta/Delete/5
+        // POST: Artysta/Delete
         [HttpPost]
         public ActionResult Delete(Models.AddArtist model)
         {
@@ -135,6 +143,7 @@ namespace Aplikacja_muzyczna.Controllers
 
             return View(List);
         }
+
         [HttpPost]
         public ActionResult List(List<DetailArtist> Lista)
         {
@@ -142,30 +151,7 @@ namespace Aplikacja_muzyczna.Controllers
         }
 
 
-        public static Tuple<string, byte[]> AddPhoto ( HttpPostedFileBase File)
-        {
-            byte[] Photo;
-            string Error = null;
-            Photo = ArtistFunction.PhotoBytefromfile(File);
-            if (Photo.Length == 1)
-            {
-                if (Photo.ToString()[0] == 'S')
-                {
-                    Error = "File to large";
-                }
-                else if (Photo.ToString()[0] =='F')
-                {
-                    Error = "Wrong file format";
-                }
-            }
-            else if (Photo.Length == 0)
-            {
-                Error = "Something went wrong";
-            }
 
-            return new Tuple <string,byte[]> (Error,Photo);
-
-        }
 
 
     }
