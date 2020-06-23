@@ -95,15 +95,14 @@ namespace Aplikacja_muzyczna.Controllers
         {
             if (Url.RequestContext.RouteData.Values["id"] != null)
             {
-                int ArtId = (int)Double.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
-                model.ArtId = ArtId;
+                model.ArtId = (int)Double.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
             }
 
             if (model.File != null)
             {
                 var Photo_error = new Tuple<byte[], string>(null, null);
                 Photo_error = ArtistFunction.VerifyPhoto(model.File);
-                if (Photo_error.Item1 != null)
+                if (Photo_error.Item2 != null)
                 {
                     ModelState.AddModelError("", Photo_error.Item2);
                     return View();
@@ -114,11 +113,11 @@ namespace Aplikacja_muzyczna.Controllers
 
             DetailArtist NewModelfromDB = new DetailArtist();
             NewModelfromDB = EditArtistDB.EditArtist(model);
-            if (model== NewModelfromDB)
+            if (model != NewModelfromDB)
             {
-                return RedirectToAction("Details");
+                return RedirectToAction("Details", new { id = NewModelfromDB .ArtId});
             }
-            return View();
+            return View(NewModelfromDB);
         }
 
         // GET: Artysta/Delete

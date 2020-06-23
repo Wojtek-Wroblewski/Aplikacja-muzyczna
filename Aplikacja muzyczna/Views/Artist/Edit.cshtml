@@ -7,8 +7,8 @@
 <!---
         <h2>Edit</h2>
 --->
+@using (Html.BeginForm("Edit", "Artist", FormMethod.Post, new { @class = "", role = "form", enctype = "multipart/form-data" }))
 
-@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
@@ -80,7 +80,7 @@
             </div>
             <div class="row" style="  text-align:center; margin:15px;">
 
-                <input type="file" name="file" id="file" class="inputfile" accept="image/*"  oninput="loadFile(event)" />
+                <input type="file" name="file" id="file" class="inputfile" accept="image/*" oninput="loadFile(event)" />
                 <label for="file">Choose photo</label>
 
                 <div class="row">
@@ -111,7 +111,7 @@
                         @Html.ActionLink("Back to List", "List")
                     </div>
                     <div class="col-xs-offset-5 col-xs-1" style="padding:0px;">
-                        <input type="submit" value="Edit" class="btn btn-default" style="margin:10px 0px 10px 0px ;padding-left:20px;padding-right:20px;"/>
+                        <input type="submit" value="Edit" class="btn btn-default" style="margin:10px 0px 10px 0px ;padding-left:20px;padding-right:20px;" />
                     </div>
                 </div>
             </div>

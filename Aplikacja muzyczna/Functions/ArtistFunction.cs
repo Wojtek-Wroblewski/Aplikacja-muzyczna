@@ -75,7 +75,7 @@ namespace Aplikacja_muzyczna.Functions
 
         public static Tuple< byte[],string> VerifyPhoto(HttpPostedFileBase File)     
         {
-            byte[] Photo;
+            byte[] Photo = null;
             string Error = null;
             Photo = ArtistFunction.PhotoBytefromfile(File);
             if (Photo.Length == 1)
