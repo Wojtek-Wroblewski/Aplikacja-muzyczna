@@ -33,7 +33,13 @@ namespace Aplikacja_muzyczna.Controllers
                 int ArtId = (int)Double.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
                 model = DetailArtistDB.DetailFromId(ArtId);
             }
+            var dupa = model.Birthdate.ToString();
+            var ad = dupa;
+            /*
+             Po create
+            "31.12.2020 00:00:00 +01:00" 
 
+             */
             return View(model);
         }
 
@@ -47,6 +53,13 @@ namespace Aplikacja_muzyczna.Controllers
         [HttpPost]
         public ActionResult Create(Models.AddArtist model, HttpPostedFileBase file)
         {
+
+            var dupa= model.Birthdate.ToString();
+            var ad = dupa;
+
+            /*
+             "31.12.2020 00:00:00 +01:00"
+             */
             model.File = file;
             if (ModelState.IsValid)
             {
@@ -54,19 +67,25 @@ namespace Aplikacja_muzyczna.Controllers
                 {
                     var Photo_error = new Tuple< byte[],string>(null, null);
                     Photo_error = ArtistFunction.VerifyPhoto( model.File);
-                    if (Photo_error.Item1 != null)
+                    if (Photo_error.Item1 == null)
                     { 
-                    ModelState.AddModelError("", Photo_error.Item2);
+                        ModelState.AddModelError("", Photo_error.Item2);
                         return View();
                     }
                     model.Photo = Photo_error.Item1;
                 }
-                AddArtistDB.SaveArtisttoDB(model);
+
+                //DetailArtist NewModelfromDB = new DetailArtist();
+                //NewModelfromDB = EditArtistDB.EditArtist(model);
+
+                int NewId =  AddArtistDB.SaveArtisttoDB(model);
+
                 var ConfigAddtoDetail = new MapperConfiguration(cfg => cfg.CreateMap<Models.AddArtist, DetailArtist>());
                 var MapAddtoDetail = ConfigAddtoDetail.CreateMapper();
                 var modelDetail = MapAddtoDetail.Map<DetailArtist>(model);
                 TempData["JustAddedArtist"] = modelDetail;
-                return RedirectToAction("Details");
+
+                return RedirectToAction("Details", new { id = NewId });
             }
                 return View();
         }

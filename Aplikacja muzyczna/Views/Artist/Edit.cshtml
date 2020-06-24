@@ -90,18 +90,22 @@
         </div>    <div class="container-fluid">
 
 
-            @{if (Model.Photo != null)
-                {
-                    byte[] photo = Model.Photo;
-                    string imageSrc = null;
-                    MemoryStream ms = new MemoryStream();
-                    ms.Write(photo, 0, photo.Length);
-                    string imageBase64 = Convert.ToBase64String(ms.ToArray());
-                    imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
-                    <img src="@imageSrc" alt="@Model.Surname @Model.Firstname" style="border:0;width:80%; margin:30px 10% 0 10%;" id="dupa" />
-                }
-            }
-        </div>
+    @{if (Model.Photo != null)
+        {
+            byte[] photo = Model.Photo;
+            string imageSrc = null;
+            MemoryStream ms = new MemoryStream();
+            ms.Write(photo, 0, photo.Length);
+            string imageBase64 = Convert.ToBase64String(ms.ToArray());
+            imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+            <img src="@imageSrc" alt="@Model.Surname @Model.Firstname" style="border:0;width:80%; margin:30px 10% 0 10%;" id="Photo" />
+        }
+        else
+        {
+            <img src="~/Photos/Photo_Placeholder.jpg" alt="@Model.Surname @Model.Firstname" style="border:0;width:80%; margin:30px 10% 0 10%;" id="Photo" />
+        }
+    }
+</div>
 
 
         <div class="form-group">
@@ -111,7 +115,7 @@
                         @Html.ActionLink("Back to List", "List")
                     </div>
                     <div class="col-xs-offset-5 col-xs-1" style="padding:0px;">
-                        <input type="submit" value="Edit" class="btn btn-default" style="margin:10px 0px 10px 0px ;padding-left:20px;padding-right:20px;" />
+                        <input type="submit" value="Save" class="btn btn-default" style="margin:10px 0px 10px 0px ;padding-left:20px;padding-right:20px;" />
                     </div>
                 </div>
             </div>
@@ -122,7 +126,7 @@
 
 <script>
     var loadFile = function (event) {
-        var image = document.getElementById('dupa');
+        var image = document.getElementById('Photo');
         image.src = URL.createObjectURL(event.target.files[0]);
     };
 </script>

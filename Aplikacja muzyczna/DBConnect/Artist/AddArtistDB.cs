@@ -22,9 +22,26 @@ namespace Aplikacja_muzyczna.DBConnect.Artist
 
             };
             // string sql = @"insert into dbo.Artysta (Nazwa1, Nazwa2, DataNajmłodszego, Uwaga, Zdjęcie, ZdjęcieString) values (@Nazwa1, @Nazwa2, @DataNajmłodszego, @Uwaga, @Zdjęcie, @ZdjęcieString);";
-            string sql = @"insert into dbo.Artist (Surname, Firstname, Photo, AdditionalInfo, Birthdate) values (@Surname, @Firstname, @Photo, @AdditionalInfo, @Birthdate);";
+            string sqlSave = @"insert into dbo.Artist (Surname, Firstname, Photo, AdditionalInfo, Birthdate) values (@Surname, @Firstname, @Photo, @AdditionalInfo, @Birthdate);";
+            DataAccess.SaveData(sqlSave, data);
+            string sqlLoad = @"SELECT Artid from dbo.Artist where " +
+                " Surname = ' " + model.Surname +
+                "' Firstname = ' " + model.Firstname +
+                "' Photo = ' " + model.Photo +
+                "' AdditionalInfo = ' " + model.AdditionalInfo +
+                "' Birthdate =' " + model.Birthdate + "'";
 
-            return DataAccess.SaveData(sql, data);
+            int AddedId = DataAccess.LoadData<DetailArtist>(sqlLoad).First().ArtId;
+            return AddedId;
         }
     }
 }
+
+
+/*
+ TODO 
+
+
+    Między kolejnymi argumentami po których szukam dodać AND 
+     
+     */
