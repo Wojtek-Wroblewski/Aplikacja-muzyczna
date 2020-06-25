@@ -23,14 +23,15 @@ namespace Aplikacja_muzyczna.DBConnect.Artist
             };
             // string sql = @"insert into dbo.Artysta (Nazwa1, Nazwa2, DataNajmłodszego, Uwaga, Zdjęcie, ZdjęcieString) values (@Nazwa1, @Nazwa2, @DataNajmłodszego, @Uwaga, @Zdjęcie, @ZdjęcieString);";
             string sqlSave = @"insert into dbo.Artist (Surname, Firstname, Photo, AdditionalInfo, Birthdate) values (@Surname, @Firstname, @Photo, @AdditionalInfo, @Birthdate);";
-            DataAccess.SaveData(sqlSave, data);
-            string sqlLoad = @"SELECT Artid from dbo.Artist where " +
-                " Surname = ' " + model.Surname +
-                "' Firstname = ' " + model.Firstname +
-                "' Photo = ' " + model.Photo +
-                "' AdditionalInfo = ' " + model.AdditionalInfo +
-                "' Birthdate =' " + model.Birthdate + "'";
-
+            var kkk = model.Photo;
+           var dupa =  DataAccess.SaveData(sqlSave, data);
+            string sqlLoad = @"SELECT ArtId from dbo.Artist where " +
+                " Surname = '" + model.Surname + "' AND " +
+                " Firstname = '" + model.Firstname + "' AND " +
+                //" Photo = '" + model.Photo + "' AND " +
+                " AdditionalInfo = '" + model.AdditionalInfo + "' ; ";
+                //" AdditionalInfo = ' " + model.AdditionalInfo + "' AND " +
+               // " Birthdate ='" + model.Birthdate + "'";
             int AddedId = DataAccess.LoadData<DetailArtist>(sqlLoad).First().ArtId;
             return AddedId;
         }

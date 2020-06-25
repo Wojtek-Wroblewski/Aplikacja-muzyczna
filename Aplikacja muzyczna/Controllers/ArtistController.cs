@@ -28,10 +28,14 @@ namespace Aplikacja_muzyczna.Controllers
                 model = TempData["JustAddedArtist"] as DetailArtist;
                 TempData.Remove("JustAddedArtist");
             }
-            else
+            else if (Url.RequestContext.RouteData.Values["id"].ToString() != null )
             { 
                 int ArtId = (int)Double.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
                 model = DetailArtistDB.DetailFromId(ArtId);
+            }
+            else
+            {
+                RedirectToAction("List");
             }
             var dupa = model.Birthdate.ToString();
             var ad = dupa;

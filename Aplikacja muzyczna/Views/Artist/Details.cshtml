@@ -55,8 +55,9 @@
 
         <div class="container-fluid">
 
+            @Html.DisplayPhoto(Model.Photo)
 
-            @{if (Model.Photo != null)
+            @*@{if (Model.Photo != null)
                 {
                     byte[] photo = Model.Photo;
                     string imageSrc = null;
@@ -70,7 +71,8 @@
                 {
                     <img src="~/Photos/Photo_Placeholder.jpg" alt="@Model.Surname @Model.Firstname" style="border:0;width:80%; margin:30px 10% 0 10%;" id="Photo" />
                 }
-            }
+            }*@
+
         </div>
 
         <div class="container-fluid" style="padding:15px;">
