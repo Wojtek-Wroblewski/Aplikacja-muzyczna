@@ -182,7 +182,9 @@
     <Compile Include="DBConnect\Artist\ListingArtistDB.cs" />
     <Compile Include="DBConnect\DataAccess.cs" />
     <Compile Include="Functions\ArtistFunction.cs" />
-    <Compile Include="Functions\helper.cs" />
+    <Compile Include="Functions\Cookies.cs" />
+    <Compile Include="Functions\Helper.cs" />
+    <Compile Include="Functions\Misc.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

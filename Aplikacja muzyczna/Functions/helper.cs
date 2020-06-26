@@ -23,13 +23,14 @@ namespace System.Web.Mvc
                     string imageBase64 = Convert.ToBase64String(ms.ToArray());
                     imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
                     string nonempty = @"<img src="+'"' +imageSrc+ '"'+@" alt = ""Photo"" style = ""border:0;width:80%; margin:30px 10% 0 10%;"" id = ""Photo"" />";
-                    return nonempty;
+
+                    return new MvcHtmlString(nonempty);
                 }
                 else
                 {
                     string empty = @" </hr> ";
-                  return empty;
-                }
+                return new MvcHtmlString(empty);
+            }
 
         }
 

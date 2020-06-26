@@ -53,7 +53,8 @@
                 <div class="col-xs-2">
                 </div>
                 <div class="col-xs-8">
-                    @Html.EditorFor(model => model.Birthdate, new { htmlAttributes = new { @class = "form-control" } })
+                    @{var Birth = Request.Cookies["BirthDate"];}
+                    @Html.EditorFor(model => model.Birthdate, new { htmlAttributes = new { @class = "form-control" , @max = Birth.Value, @Value = Birth.Value } })
                     @Html.ValidationMessageFor(model => model.Birthdate, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -90,21 +91,8 @@
         </div>    <div class="container-fluid">
 
 
-    @{if (Model.Photo != null)
-        {
-            byte[] photo = Model.Photo;
-            string imageSrc = null;
-            MemoryStream ms = new MemoryStream();
-            ms.Write(photo, 0, photo.Length);
-            string imageBase64 = Convert.ToBase64String(ms.ToArray());
-            imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
-            <img src="@imageSrc" alt="@Model.Surname @Model.Firstname" style="border:0;width:80%; margin:30px 10% 0 10%;" id="Photo" />
-        }
-        else
-        {
-            <img src="~/Photos/Photo_Placeholder.jpg" alt="@Model.Surname @Model.Firstname" style="border:0;width:80%; margin:30px 10% 0 10%;" id="Photo" />
-        }
-    }
+    @Html.DisplayPhoto(Model.Photo)
+
 </div>
 
 
