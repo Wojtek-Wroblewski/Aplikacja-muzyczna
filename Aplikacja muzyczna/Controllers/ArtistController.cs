@@ -137,7 +137,7 @@ namespace Aplikacja_muzyczna.Controllers
 
         // POST: Artysta/Delete
         [HttpPost]
-        public ActionResult Delete(Models.AddArtist model)
+        public ActionResult Delete(AddArtist model)
         {
             return RedirectToAction("List");
         }
