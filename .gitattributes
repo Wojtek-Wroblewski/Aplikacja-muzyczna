@@ -66,3 +66,4 @@
 
 *.css linguist-detectable=false
 *.js linguist-detectable=false
+*.java linguist-detectable=false
