@@ -9,7 +9,6 @@ namespace Aplikacja_muzyczna.Models
 {
     public class AddArtist
     {
-
         [Display(Name = "Insert surname")]
         [Required(ErrorMessage = "Field can't be empty")]
         public string Surname { get; set; }

@@ -10,16 +10,20 @@ namespace Aplikacja_muzyczna.Functions
         public static void Today()
         {
             RemoveCookie("DateNow");
-            HttpCookie DateNow = new HttpCookie("DateNow", "");
-            DateNow.Value = Misc.DateTimeToString(DateTimeOffset.Now);
+            HttpCookie DateNow = new HttpCookie("DateNow", "")
+            {
+                Value = Misc.DateTimeToString(DateTimeOffset.Now)
+            };
             DateNow.Expires.AddDays(1);
             HttpContext.Current.Response.SetCookie(DateNow);
         }
 
        public static void  CreateDay(DateTimeOffset Birth)
         {
-            HttpCookie BirthDate = new HttpCookie("BirthDate", "");
-            BirthDate.Value = Misc.DateTimeToString(Birth);
+            HttpCookie BirthDate = new HttpCookie("BirthDate", "")
+            {
+                Value = Misc.DateTimeToString(Birth)
+            };
             BirthDate.Expires.AddDays(1);
             HttpContext.Current.Response.SetCookie(BirthDate);
         }
