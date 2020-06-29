@@ -14,13 +14,13 @@ namespace Aplikacja_muzyczna.DBConnect.Artist
         public static DetailArtist EditArtist(DetailArtist NewModel)
         {
 
-            DetailArtist OldModel = DetailArtistDB.DetailFromId(NewModel.ArtId);
+            DetailArtist OldModel = DetailArtistDB.DetailFromId(NewModel.ArtistId);
             string sql = ArtistFunction.ModifyArtistSring(NewModel, OldModel);
 
             DataAccess.SaveData(sql, NewModel);
 
             DetailArtist NewModelfromDB = new DetailArtist(); 
-            NewModelfromDB = DetailArtistDB.DetailFromId(OldModel.ArtId);
+            NewModelfromDB = DetailArtistDB.DetailFromId(OldModel.ArtistId);
 
             return NewModelfromDB;
         }

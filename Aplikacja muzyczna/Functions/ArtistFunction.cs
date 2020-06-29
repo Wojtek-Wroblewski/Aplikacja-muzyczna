@@ -11,7 +11,6 @@ namespace Aplikacja_muzyczna.Functions
     public class ArtistFunction
     {
 
-
         public static byte[] PhotoBytefromfile(HttpPostedFileBase File)
         {
 
@@ -67,7 +66,7 @@ namespace Aplikacja_muzyczna.Functions
                     sql += "Photo = @Photo, ";
                 }
             sql = sql.Remove(sql.Length - 2, 2);
-            sql += "  Where ArtId = @ArtId; ";
+            sql += "  Where ArtistId = @ArtistId; ";
 
 
             return sql;
@@ -97,5 +96,12 @@ namespace Aplikacja_muzyczna.Functions
             return new Tuple<byte[],string>(Photo,Error);
 
         }
+
+        public static List<DetailArtist> Search(string SearchString)
+        {
+
+            return null;
+        }
+
     }
 }

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Aplikacja_muzyczna.Models.DetailArtist>
+
+@{
+    ViewBag.Title = "SearchArtist";
+}
+
+<h2>SearchArtist</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="form-horizontal" style=" text-align:center;">
+    <tr style=" text-align:center;">
+        <th style=" padding:15px;">
+            @Html.DisplayNameFor(model => model.Surname)
+        </th>
+        <th style=" padding:15px;">
+            @Html.DisplayNameFor(model => model.Firstname)
+        </th>
+        <th style=" padding:15px;">
+            @Html.DisplayNameFor(model => model.Birthdate)
+        </th>
+        <th style=" padding:15px;">
+            @Html.DisplayNameFor(model => model.AdditionalInfo)
+        </th>
+        <th style=" padding:15px;"></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr style=" text-align:center;">
+        <td style=" padding:15px;">
+            @Html.DisplayFor(modelItem => item.Surname)
+        </td>
+        <td style=" padding:15px;">
+            @Html.DisplayFor(modelItem => item.Firstname)
+        </td>
+        <td style=" padding:15px;">
+            @Html.DisplayFor(modelItem => item.Birthdate)
+        </td>
+        <td style=" padding:15px;">
+            @Html.DisplayFor(modelItem => item.AdditionalInfo)
+        </td>
+        <td style=" padding:15px;">
+            @Html.ActionLink("Edit", "Edit", new { id=item.ArtistId }) 
+            @Html.ActionLink("Details", "Details", new { id=item.ArtistId }) 
+            @Html.ActionLink("Delete", "Delete", new { id=item.ArtistId })
+        </td>
+    </tr>
+}
+
+</table>

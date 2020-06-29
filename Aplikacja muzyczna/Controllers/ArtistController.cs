@@ -14,23 +14,23 @@ namespace Aplikacja_muzyczna.Controllers
     public class ArtistController : Controller
     {
         // GET: Artysta
-        public ActionResult Index()
+        public ActionResult IndexArtist()
         {
             return View();
         }
 
         // GET: Artysta/Details/5
-        public ActionResult Details(DetailArtist model)
+        public ActionResult DetailsArtist(DetailArtist model)
         {
 
             if (Url.RequestContext.RouteData.Values["id"] != null )
             { 
-                int ArtId = (int)Double.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
-                model = DetailArtistDB.DetailFromId(ArtId);
+                int ArtistId = (int)Double.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
+                model = DetailArtistDB.DetailFromId(ArtistId);
             }
             else
             {
-               return RedirectToAction("List");
+               return RedirectToAction("ListArtist");
             }
             var dupa = model.Birthdate.ToString();
             var ad = dupa;
@@ -43,7 +43,7 @@ namespace Aplikacja_muzyczna.Controllers
         }
 
         // GET: Artysta/Create
-        public ActionResult Create()
+        public ActionResult CreateArtist()
         {
             Cookies.Today();
             return View();
@@ -51,7 +51,7 @@ namespace Aplikacja_muzyczna.Controllers
 
         // POST: Artysta/Create
         [HttpPost]
-        public ActionResult Create(Models.AddArtist model, HttpPostedFileBase file)
+        public ActionResult CreateArtist(Models.AddArtist model, HttpPostedFileBase file)
         {
             var dupa= model.Birthdate.ToString();
             var ad = dupa;
@@ -76,34 +76,34 @@ namespace Aplikacja_muzyczna.Controllers
                 
                 int NewId =  AddArtistDB.SaveArtisttoDB(model);
 
-                return RedirectToAction("Details", new { id = NewId });
+                return RedirectToAction("DetailsArtist", new { id = NewId });
             }
                 return View();
         }
 
         // GET: Artysta/Edit
-        public ActionResult Edit()
+        public ActionResult EditArtist()
         {
             if (Url.RequestContext.RouteData.Values["id"] != null)
             {
-                int ArtId = (int)Double.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
-                DetailArtist model = DetailArtistDB.DetailFromId(ArtId);
+                int ArtistId = (int)Double.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
+                DetailArtist model = DetailArtistDB.DetailFromId(ArtistId);
                 Cookies.CreateDay(model.Birthdate);
                 return View(model);
             }
             else
             {
-                return RedirectToAction("List");
+                return RedirectToAction("ListArtist");
             }
         }
 
         // POST: Artysta/Edit
         [HttpPost]
-        public ActionResult Edit(DetailArtist model, HttpPostedFileBase file)
+        public ActionResult EditArtist(DetailArtist model, HttpPostedFileBase file)
         {
             if (Url.RequestContext.RouteData.Values["id"] != null)
             {
-                model.ArtId = (int)Double.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
+                model.ArtistId = (int)Double.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
             }
 
             if (model.File != null)
@@ -124,26 +124,26 @@ namespace Aplikacja_muzyczna.Controllers
             if (model != NewModelfromDB)
             {
                 Cookies.RemoveCookie("BirthDate");
-                return RedirectToAction("Details", new { id = NewModelfromDB .ArtId});
+                return RedirectToAction("DetailsArtist", new { id = NewModelfromDB .ArtistId });
             }
             return View(NewModelfromDB);
         }
 
         // GET: Artysta/Delete
-        public ActionResult Delete()
+        public ActionResult DeleteArtist()
         {
             return View();
         }
 
         // POST: Artysta/Delete
         [HttpPost]
-        public ActionResult Delete(AddArtist model)
+        public ActionResult DeleteArtist(AddArtist model)
         {
             return RedirectToAction("List");
         }
 
         
-        public ActionResult List()
+        public ActionResult ListArtist()
         {
 
             List<DetailArtist> List = new List<DetailArtist>();
@@ -152,13 +152,6 @@ namespace Aplikacja_muzyczna.Controllers
             return View(List);
         }
 
-        /*
-        [HttpPost]
-        public ActionResult List(List<DetailArtist> Lista)
-        {
-            return View(Lista);
-        }
-        */
 
 
 

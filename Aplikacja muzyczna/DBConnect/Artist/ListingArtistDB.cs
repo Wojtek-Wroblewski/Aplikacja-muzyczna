@@ -12,10 +12,7 @@ namespace Aplikacja_muzyczna.DBConnect.Artist
 
         public static List<DetailArtist> SelectAll()
         {
-
             string sql = @"select * from dbo.Artist;";
-
-
             return DataAccess.LoadData<DetailArtist>(sql);
         }
 

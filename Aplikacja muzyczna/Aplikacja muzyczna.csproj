@@ -186,6 +186,7 @@
     <Compile Include="Functions\Cookies.cs" />
     <Compile Include="Functions\Helper.cs" />
     <Compile Include="Functions\Misc.cs" />
+    <Compile Include="Functions\TrackFunctions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -264,17 +265,17 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Artist\Create.cshtml" />
-    <Content Include="Views\Artist\Details.cshtml" />
-    <Content Include="Views\Artist\List.cshtml" />
-    <Content Include="Views\Artist\Edit.cshtml" />
-    <Content Include="Views\Artist\Delete.cshtml" />
+    <Content Include="Views\Artist\CreateArtist.cshtml" />
+    <Content Include="Views\Artist\DetailsArtist.cshtml" />
+    <Content Include="Views\Artist\ListArtist.cshtml" />
+    <Content Include="Views\Artist\EditArtist.cshtml" />
+    <Content Include="Views\Artist\DeleteArtist.cshtml" />
+    <Content Include="Views\Track\CreateTrack.cshtml" />
+    <Content Include="Views\Track\SearchArtist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Artysta\" />
-    <Folder Include="Views\TEMPLATE\" />
-    <Folder Include="Views\Track\" />
+    <Folder Include="DBConnect\Track\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -24,7 +24,7 @@ namespace Aplikacja_muzyczna.Models
         public string AdditionalInfo { get; set; }
         public HttpPostedFileBase File { get; set; }
         [Key]
-        public int ArtId { get; set; }
+        public int ArtistId { get; set; }
 
     }
 
@@ -46,7 +46,7 @@ namespace Aplikacja_muzyczna.Models
         public string AdditionalInfo { get; set; }
         public HttpPostedFileBase File { get; set; }
         [Key]
-        public int ArtId { get; set; }
+        public int ArtistId { get; set; }
 
     }
     

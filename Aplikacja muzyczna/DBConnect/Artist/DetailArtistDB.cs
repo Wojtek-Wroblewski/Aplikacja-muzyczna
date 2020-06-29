@@ -10,10 +10,10 @@ namespace Aplikacja_muzyczna.DBConnect.Artist
     public class DetailArtistDB
     {
 
-        public static DetailArtist DetailFromId(int ArtId)
+        public static DetailArtist DetailFromId(int ArtistId)
         {
 
-            string sql = @"select * from dbo.Artist where ArtId=" + ArtId + ";";
+            string sql = @"select * from dbo.Artist where ArtistId=" + ArtistId + ";";
 
 
             return DataAccess.LoadData<DetailArtist>(sql).First();

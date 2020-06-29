@@ -7,7 +7,7 @@
 <h2>List</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "CreateArtist")
 </p>
 <table class="form-horizontal" style=" text-align:center;">
     <tr style=" text-align:center;">
@@ -41,9 +41,9 @@
             @Html.DisplayFor(modelItem => item.AdditionalInfo)
         </td>
         <td style=" padding:15px;">
-            @Html.ActionLink("Edit", "Edit", new { id=item.ArtId }) 
-            @Html.ActionLink("Details", "Details", new { id=item.ArtId }) 
-            @Html.ActionLink("Delete", "Delete", new { id=item.ArtId })
+            @Html.ActionLink("Edit", "EditArtist", new { id=item.ArtistId }) 
+            @Html.ActionLink("Details", "DetailsArtist", new { id=item.ArtistId }) 
+            @Html.ActionLink("Delete", "DeleteArtist", new { id=item.ArtistId })
         </td>
     </tr>
 }

@@ -25,24 +25,16 @@ namespace Aplikacja_muzyczna.DBConnect.Artist
             string sqlSave = @"insert into dbo.Artist (Surname, Firstname, Photo, AdditionalInfo, Birthdate) values (@Surname, @Firstname, @Photo, @AdditionalInfo, @Birthdate);";
             var kkk = model.Photo;
            var dupa =  DataAccess.SaveData(sqlSave, data);
-            string sqlLoad = @"SELECT ArtId from dbo.Artist where " +
+            string sqlLoad = @"SELECT ArtistId from dbo.Artist where " +
                 " Surname = '" + model.Surname + "' AND " +
                 " Firstname = '" + model.Firstname + "' AND " +
                 //" Photo = '" + model.Photo + "' AND " +
                 " AdditionalInfo = '" + model.AdditionalInfo + "' ; ";
                 //" AdditionalInfo = ' " + model.AdditionalInfo + "' AND " +
                // " Birthdate ='" + model.Birthdate + "'";
-            int AddedId = DataAccess.LoadData<DetailArtist>(sqlLoad).First().ArtId;
+            int AddedId = DataAccess.LoadData<DetailArtist>(sqlLoad).First().ArtistId;
             return AddedId;
         }
     }
 }
 
-
-/*
- TODO 
-
-
-    Między kolejnymi argumentami po których szukam dodać AND 
-     
-     */
