@@ -11,6 +11,7 @@ namespace Aplikacja_muzyczna.Functions
         public static List<DetailTracks> Search(string SearchString)
         {
 
+
             return null;
         }
     }

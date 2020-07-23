@@ -41,7 +41,7 @@ namespace Aplikacja_muzyczna.Controllers
         public ActionResult SearchArtist (string searchString)
         {
             List<DetailArtist> model = new List<DetailArtist>();
-            model = ArtistFunction.Search(searchString);
+            model = DBConnect.Artist.ListingArtistDB.SearchArtist(searchString);
             return View(model);
         }
     }

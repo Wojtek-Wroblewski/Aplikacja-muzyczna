@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Helpers;
+using Aplikacja_muzyczna.Functions;
 namespace Aplikacja_muzyczna.DBConnect.Artist
 {
     public class ListingArtistDB
@@ -16,5 +17,10 @@ namespace Aplikacja_muzyczna.DBConnect.Artist
             return DataAccess.LoadData<DetailArtist>(sql);
         }
 
+        public static List<DetailArtist> SearchArtist(string SearchString)
+        {
+            string sql = ArtistFunction.SearchStringArtist(SearchString);
+            return DataAccess.LoadData<DetailArtist>(sql);
+        }
     }
 }

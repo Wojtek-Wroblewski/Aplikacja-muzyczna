@@ -97,10 +97,46 @@ namespace Aplikacja_muzyczna.Functions
 
         }
 
-        public static List<DetailArtist> Search(string SearchString)
+        public static string SearchStringArtist(string SearchString)
         {
+            string sql = @" insert into TEMP SELECT * FROM dbo.Artist where
 
-            return null;
+  Surname like '"+ "SearchString" + @"' and 
+
+  Firstname like '" + "SearchString" + @"'
+
+  select * from TEMP
+
+  insert into TEMP2
+
+SELECT
+
+*
+
+FROM
+
+  tab
+
+  where
+
+  Surname like '" + "SearchString" + @"' or 
+
+  Firstname like '" + "SearchString" + @"'
+
+  select * from TEMP2
+
+ 
+  insert into final
+
+Select z.*
+
+from TEMP as x  full join TEMP2 as z
+
+on x.id  = z.id ;
+
+select * from final;
+    ";
+            return sql;
         }
 
     }

@@ -30,6 +30,9 @@ namespace Aplikacja_muzyczna.DBConnect.Artist
                 " Firstname = '" + model.Firstname + "' AND " +
                 //" Photo = '" + model.Photo + "' AND " +
                 " AdditionalInfo = '" + model.AdditionalInfo + "' ; ";
+            /*TODO 
+             wyjąterk że jak jest additiona info ==null*/
+
                 //" AdditionalInfo = ' " + model.AdditionalInfo + "' AND " +
                // " Birthdate ='" + model.Birthdate + "'";
             int AddedId = DataAccess.LoadData<DetailArtist>(sqlLoad).First().ArtistId;
