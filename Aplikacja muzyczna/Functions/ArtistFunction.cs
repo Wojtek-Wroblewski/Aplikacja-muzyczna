@@ -45,9 +45,9 @@ namespace Aplikacja_muzyczna.Functions
                     sql += "Firstname = @Firstname, ";
                 }
             
-                if (NewModel.Surname != Oldmodel.Surname)
+                if (NewModel.Lastname != Oldmodel.Lastname)
                 {
-                    sql += "Surname = @Surname, ";
+                    sql += "Lastname = @Lastname, ";
                 }
 
             if (NewModel.Birthdate != null)
@@ -99,45 +99,35 @@ namespace Aplikacja_muzyczna.Functions
 
         public static string SearchStringArtist(string SearchString)
         {
-            string sql = @" insert into TEMP SELECT * FROM dbo.Artist where
-
-  Surname like '"+ "SearchString" + @"' and 
-
-  Firstname like '" + "SearchString" + @"'
-
-  select * from TEMP
-
-  insert into TEMP2
-
-SELECT
-
-*
-
-FROM
-
-  tab
-
-  where
-
-  Surname like '" + "SearchString" + @"' or 
-
-  Firstname like '" + "SearchString" + @"'
-
-  select * from TEMP2
-
- 
-  insert into final
-
-Select z.*
-
-from TEMP as x  full join TEMP2 as z
-
-on x.id  = z.id ;
-
-select * from final;
-    ";
+            string sql =
+                @"declare @Fullname varchar(max) = '" + SearchString + @"' "+
+@"DECLARE @Firstname varchar(max) = (SELECT TOP 1 * FROM string_split(@Fullname, ' ')) " +
+@"Declare @Lastname varchar(max) = (SELECT Top 1 * FROM string_split(@Fullname, ' ') where value != @Firstname) " +
+@"Declare @Table table(ArtistId int, Lastname varchar(max), Firstname varchar(max), Photo image, AdditionalInfo varchar(max),Birthdate datetime )  " +
+@"Insert into @Table Select *from Artist where Firstname like @Firstname and Lastname like @Lastname; " +
+@"            if (select count(*) from @Table) < 1 " +
+@"    BEGIN " +
+@"        DECLARE @LastnameSWAP varchar(max) = @Firstname " +
+@"        DECLARE @FirstnameSWAP varchar(max) = @Lastname " +
+@"        Insert into @Table Select *from Artist where Firstname = @FirstnameSWAP and Lastname = @LastnameSWAP; " +
+@"            END " +
+@"            if (select count(*) from @Table) < 1 " +
+@"    BEGIN " +
+@"        Insert into @Table Select *from Artist where Firstname = @Firstname or Lastname = @Lastname; " +
+@"            END " +
+@"            if (select count(*) from @Table) < 1 " +
+@"    BEGIN " +
+@"        Insert into @Table Select *from Artist where Firstname = @FirstnameSWAP or Lastname = @LastnameSWAP; " +
+@"            END " +
+@"if (select count(*) from @Table) < 1 " +
+@"    BEGIN " +
+@"        Insert into @Table select* from Artist where Lastname = @Lastname " +
+@"        Insert into @Table select *from Artist where Firstname = @Firstname " +
+@"    END " +
+@" Select* from @Table; "; 
             return sql;
         }
 
+ 
     }
 }

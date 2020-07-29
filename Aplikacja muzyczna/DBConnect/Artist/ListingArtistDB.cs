@@ -22,5 +22,13 @@ namespace Aplikacja_muzyczna.DBConnect.Artist
             string sql = ArtistFunction.SearchStringArtist(SearchString);
             return DataAccess.LoadData<DetailArtist>(sql);
         }
+
+        public static string SingleNamesFromId (string ArtistId)
+        {
+            string sql = @"select Firstname, Lastname from  Artist where ArtistId = " + ArtistId + ";";
+            DetailArtist Single = new DetailArtist();
+            Single = DataAccess.LoadData<DetailArtist>(sql).First() ;
+            return Single.Firstname + " " + Single.Lastname;
+        }
     }
 }

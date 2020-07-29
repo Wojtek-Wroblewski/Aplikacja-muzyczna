@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Aplikacja_muzyczna.Functions;
 using Aplikacja_muzyczna.Models;
+using Aplikacja_muzyczna.DBConnect.Artist;
 
 namespace Aplikacja_muzyczna.Controllers
 {
@@ -18,6 +20,13 @@ namespace Aplikacja_muzyczna.Controllers
 
         public ActionResult CreateTrack ()
         {
+            string url = Request.Url.AbsoluteUri;
+            string[] temp = url.Split('=');
+            if (temp.Length > 1)
+            {
+                TempData["JustSearchedArtist"]=ListingArtistDB.SingleNamesFromId(temp[1]);
+            }
+
             Cookies.Today();
             return View();
         }
@@ -31,7 +40,7 @@ namespace Aplikacja_muzyczna.Controllers
                     // Do something
                     break;
                 case "Search":
-                    return SearchArtist(model.SearchString);
+                    return RedirectToAction("SearchArtist", new { searchString = model.SearchString });
                     break;
                 default:
                     break;

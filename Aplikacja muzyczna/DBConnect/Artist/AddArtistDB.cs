@@ -14,7 +14,7 @@ namespace Aplikacja_muzyczna.DBConnect.Artist
         {
             AddArtist data = new AddArtist
             {
-                Surname =model.Surname,
+                Lastname =model.Lastname,
                 Firstname=model.Firstname,
                 Photo=model.Photo,
                 AdditionalInfo=model.AdditionalInfo,
@@ -22,11 +22,11 @@ namespace Aplikacja_muzyczna.DBConnect.Artist
 
             };
             // string sql = @"insert into dbo.Artysta (Nazwa1, Nazwa2, DataNajmłodszego, Uwaga, Zdjęcie, ZdjęcieString) values (@Nazwa1, @Nazwa2, @DataNajmłodszego, @Uwaga, @Zdjęcie, @ZdjęcieString);";
-            string sqlSave = @"insert into dbo.Artist (Surname, Firstname, Photo, AdditionalInfo, Birthdate) values (@Surname, @Firstname, @Photo, @AdditionalInfo, @Birthdate);";
+            string sqlSave = @"insert into dbo.Artist (Lastname, Firstname, Photo, AdditionalInfo, Birthdate) values (@Lastname, @Firstname, @Photo, @AdditionalInfo, @Birthdate);";
             var kkk = model.Photo;
            var dupa =  DataAccess.SaveData(sqlSave, data);
             string sqlLoad = @"SELECT ArtistId from dbo.Artist where " +
-                " Surname = '" + model.Surname + "' AND " +
+                " Lastname = '" + model.Lastname + "' AND " +
                 " Firstname = '" + model.Firstname + "' AND " +
                 //" Photo = '" + model.Photo + "' AND " +
                 " AdditionalInfo = '" + model.AdditionalInfo + "' ; ";

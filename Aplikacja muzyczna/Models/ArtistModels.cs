@@ -9,9 +9,9 @@ namespace Aplikacja_muzyczna.Models
 {
     public class AddArtist
     {
-        [Display(Name = "Insert surname")]
+        [Display(Name = "Insert Lastname")]
         [Required(ErrorMessage = "Field can't be empty")]
-        public string Surname { get; set; }
+        public string Lastname { get; set; }
         [Display(Name = "Insert First name")]
         public string Firstname { get; set; }
         [Display(Name = "Insert birth date or date of established")]
@@ -31,9 +31,9 @@ namespace Aplikacja_muzyczna.Models
     public class DetailArtist
     {
 
-        [Display(Name = "Surname")]
+        [Display(Name = "Lastname")]
         [Required(ErrorMessage = "Field can't be empty")]
-        public string Surname { get; set; }
+        public string Lastname { get; set; }
         [Display(Name = "First name")]
         public string Firstname { get; set; }
         [Display(Name = "Birth date or date of established")]

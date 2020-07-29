@@ -38,6 +38,5 @@ namespace Aplikacja_muzyczna.Functions
         }
 
 
-
     }
 }
