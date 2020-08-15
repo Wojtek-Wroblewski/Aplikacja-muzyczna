@@ -25,6 +25,11 @@ namespace Aplikacja_muzyczna
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            /*CUSTOM*/
+            bundles.Add(new ScriptBundle("~/bundles/dropdown_hover").Include(
+                "~/Scripts/Custom/dropdown_hover.js"));
+
         }
     }
 }

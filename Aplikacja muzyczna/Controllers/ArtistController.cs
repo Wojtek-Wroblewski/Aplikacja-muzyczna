@@ -131,15 +131,21 @@ namespace Aplikacja_muzyczna.Controllers
 
         // GET: Artysta/Delete
         public ActionResult DeleteArtist()
-        {
+        {/*TODO
+            Znajdz artyste po id 
+            wyjątke na brak id 
+            sprawdz czy ma uprawnienia, obsłużyc rolami?
+             */
             return View();
         }
 
         // POST: Artysta/Delete
         [HttpPost]
         public ActionResult DeleteArtist(AddArtist model)
-        {
-            return RedirectToAction("List");
+        {/*TODO
+            cały mózg usuwania, sprawdzenie czy usunięto pomyślnie, i ekran po usuniciu udanym i po failu 
+             */
+            return RedirectToAction("ListArtist");
         }
 
         

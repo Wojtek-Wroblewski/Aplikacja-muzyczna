@@ -40,6 +40,18 @@ namespace Aplikacja_muzyczna.Controllers
                     // Do something
                     break;
                 case "Search":
+                    if (model.Title != null)
+                        TempData["TrackTitle"] = model.Title;
+                    if (model.ReleaseDate != null)
+                    {
+                        string temp = model.ReleaseDate.ToString();
+                        char separator = '.';
+                        string[] date = temp.Split(separator);
+                        string[] temp2 = date[2].Split(' ');
+                        date[2] = temp2[0];
+                        var dupa = date[2] + '-' + date[1] + '-' + date[0].ToString();
+                        TempData["TrackDate"] = date[2] + '-' + date[1] + '-' + date[0];
+                    }
                     return RedirectToAction("SearchArtist", new { searchString = model.SearchString });
                     break;
                 default:

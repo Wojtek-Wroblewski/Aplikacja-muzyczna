@@ -103,7 +103,11 @@ namespace Aplikacja_muzyczna.Functions
                 @"declare @Fullname varchar(max) = '" + SearchString + @"' "+
 @"DECLARE @Firstname varchar(max) = (SELECT TOP 1 * FROM string_split(@Fullname, ' ')) " +
 @"Declare @Lastname varchar(max) = (SELECT Top 1 * FROM string_split(@Fullname, ' ') where value != @Firstname) " +
-@"Declare @Table table(ArtistId int, Lastname varchar(max), Firstname varchar(max), Photo image, AdditionalInfo varchar(max),Birthdate datetime )  " +
+@"Declare @Table table(ArtistId int, Lastname varchar(max), Firstname varchar(max), Photo image, AdditionalInfo varchar(max),Birthdate datetime )  "  +
+@"if (@Lastname is null) " +
+@"    begin "+
+@"                    insert into @Table Select* from Artist where Firstname like @Firstname or Lastname like @Firstname " +
+@"               end " +
 @"Insert into @Table Select *from Artist where Firstname like @Firstname and Lastname like @Lastname; " +
 @"            if (select count(*) from @Table) < 1 " +
 @"    BEGIN " +
