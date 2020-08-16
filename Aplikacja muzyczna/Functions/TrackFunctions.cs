@@ -15,6 +15,15 @@ namespace Aplikacja_muzyczna.Functions
             return null;
         }
 
-
+        public static string Format_rrrrmmdd(DateTimeOffset ReleaseDate)
+        {
+            string WrongDate = ReleaseDate.ToString();
+            char separator = '.';
+            string[] CorrectDate = WrongDate.Split(separator);
+            string[] YearCorrection = CorrectDate[2].Split(' ');
+            CorrectDate[2] = YearCorrection[0];
+            return CorrectDate[2] + '-' + CorrectDate[1] + '-' + CorrectDate[0];
+        }
+       // public static string 
     }
 }

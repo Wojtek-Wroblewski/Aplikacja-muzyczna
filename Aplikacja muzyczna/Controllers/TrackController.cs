@@ -37,20 +37,19 @@ namespace Aplikacja_muzyczna.Controllers
             switch (submit)
             {
                 case "Create":
-                    // Do something
+                    if (ModelState.IsValid)
+                    {
+                        var dupa = model;
+                        var f = dupa;
+                        
+                    }
                     break;
                 case "Search":
                     if (model.Title != null)
                         TempData["TrackTitle"] = model.Title;
                     if (model.ReleaseDate != null)
                     {
-                        string temp = model.ReleaseDate.ToString();
-                        char separator = '.';
-                        string[] date = temp.Split(separator);
-                        string[] temp2 = date[2].Split(' ');
-                        date[2] = temp2[0];
-                        var dupa = date[2] + '-' + date[1] + '-' + date[0].ToString();
-                        TempData["TrackDate"] = date[2] + '-' + date[1] + '-' + date[0];
+                        TempData["TrackDate"] = TrackFunctions.Format_rrrrmmdd(model.ReleaseDate);
                     }
                     return RedirectToAction("SearchArtist", new { searchString = model.SearchString });
                     break;
@@ -64,6 +63,10 @@ namespace Aplikacja_muzyczna.Controllers
             List<DetailArtist> model = new List<DetailArtist>();
             model = DBConnect.Artist.ListingArtistDB.SearchArtist(searchString);
             return View(model);
+        }
+        public ActionResult DetailsArtist (DetailTracks model)
+        {
+            return View();
         }
     }
 }
