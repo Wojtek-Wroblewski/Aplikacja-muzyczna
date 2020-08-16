@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Aplikacja_muzyczna.Functions;
 using Aplikacja_muzyczna.Models;
 using Aplikacja_muzyczna.DBConnect.Artist;
+using Aplikacja_muzyczna.DBConnect.Track;
 
 namespace Aplikacja_muzyczna.Controllers
 {
@@ -39,9 +40,15 @@ namespace Aplikacja_muzyczna.Controllers
                 case "Create":
                     if (ModelState.IsValid)
                     {
-                        var dupa = model;
-                        var f = dupa;
-                        
+                        int JustaddedTrack = AddTrackDB.SaveTracktoDB(model);
+                        if (JustaddedTrack != 0 )
+                        {
+                            return RedirectToAction("DetailsTrack", new { TrackId = JustaddedTrack });
+                        }else
+                        {
+                            /*TODO
+                             jakiś error skrin ze sie nie dodało*/
+                        }
                     }
                     break;
                 case "Search":
@@ -64,9 +71,14 @@ namespace Aplikacja_muzyczna.Controllers
             model = DBConnect.Artist.ListingArtistDB.SearchArtist(searchString);
             return View(model);
         }
-        public ActionResult DetailsArtist (DetailTracks model)
+        public ActionResult DetailsTrack (DetailTracks model, int TrackId)
         {
-            return View();
+            /*TODO
+             Zamiast Trackid imie i nazwisko artysty, może jego zdjęcie?
+             */
+           model = DBConnect.DataAccess.LoadData<DetailTracks>(@"select * from dbo.Track where TrackId = " + TrackId.ToString() + ";").First();
+
+            return View(model);
         }
     }
 }

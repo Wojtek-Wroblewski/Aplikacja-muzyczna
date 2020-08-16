@@ -75,8 +75,16 @@ namespace Aplikacja_muzyczna.Controllers
                 }
                 
                 int NewId =  AddArtistDB.SaveArtisttoDB(model);
-
+                if (NewId !=0)
+                {
                 return RedirectToAction("DetailsArtist", new { id = NewId });
+                }
+                else
+                {
+                    /*TODO 
+                     Jakiś error skrein do dodawania artysty*/
+                }
+
             }
                 return View();
         }

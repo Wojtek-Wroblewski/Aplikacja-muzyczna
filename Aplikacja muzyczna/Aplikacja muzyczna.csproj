@@ -274,6 +274,7 @@
     <Content Include="Views\Artist\DeleteArtist.cshtml" />
     <Content Include="Views\Track\CreateTrack.cshtml" />
     <Content Include="Views\Track\SearchArtist.cshtml" />
+    <Content Include="Views\Track\DetailsTrack.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

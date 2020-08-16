@@ -23,20 +23,25 @@ namespace Aplikacja_muzyczna.DBConnect.Artist
             };
             // string sql = @"insert into dbo.Artysta (Nazwa1, Nazwa2, DataNajmłodszego, Uwaga, Zdjęcie, ZdjęcieString) values (@Nazwa1, @Nazwa2, @DataNajmłodszego, @Uwaga, @Zdjęcie, @ZdjęcieString);";
             string sqlSave = @"insert into dbo.Artist (Lastname, Firstname, Photo, AdditionalInfo, Birthdate) values (@Lastname, @Firstname, @Photo, @AdditionalInfo, @Birthdate);";
-            var kkk = model.Photo;
-           var dupa =  DataAccess.SaveData(sqlSave, data);
-            string sqlLoad = @"SELECT ArtistId from dbo.Artist where " +
-                " Lastname = '" + model.Lastname + "' AND " +
-                " Firstname = '" + model.Firstname + "' AND " +
-                //" Photo = '" + model.Photo + "' AND " +
-                " AdditionalInfo = '" + model.AdditionalInfo + "' ; ";
-            /*TODO 
-             wyjąterk że jak jest additiona info ==null*/
+
+            int Numberofsaves = DataAccess.SaveData(sqlSave, data);
+            if (Numberofsaves == 1)
+            {
+                string sqlLoad = @"SELECT ArtistId from dbo.Artist where " +
+                    " Lastname = '" + model.Lastname + "' AND " +
+                    " Firstname = '" + model.Firstname + "' AND " +
+                    //" Photo = '" + model.Photo + "' AND " +
+                    " AdditionalInfo = '" + model.AdditionalInfo + "' ; ";
+                /*TODO 
+                 wyjąterk że jak jest additiona info ==null*/
 
                 //" AdditionalInfo = ' " + model.AdditionalInfo + "' AND " +
-               // " Birthdate ='" + model.Birthdate + "'";
-            int AddedId = DataAccess.LoadData<DetailArtist>(sqlLoad).First().ArtistId;
-            return AddedId;
+                // " Birthdate ='" + model.Birthdate + "'";
+                int AddedId = DataAccess.LoadData<DetailArtist>(sqlLoad).First().ArtistId;
+                return AddedId;
+            }
+            else
+return 0;
         }
     }
 }
