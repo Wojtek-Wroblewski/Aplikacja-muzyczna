@@ -13,11 +13,11 @@ namespace Aplikacja_muzyczna.DBConnect.Track
 
             AddTracks data = new AddTracks
             {
-                ArtistId = model.ArtistId,
+                ArtistIdFK = model.ArtistIdFK,
                 ReleaseDate = model.ReleaseDate,
                 Title = model.Title
             };
-            string sqlSave = @"INSERT into dbo.Track (ArtistId, ReleaseDate, Title) values (@ArtistId, @ReleaseDate, @Title);";
+            string sqlSave = @"INSERT into dbo.Track (ArtistIdFK, ReleaseDate, Title) values (@ArtistIdFK, @ReleaseDate, @Title);";
 
             int Numberofsaves = DataAccess.SaveData(sqlSave, data);
             string DateWithoutGarbage = model.ReleaseDate.ToString().Substring(0, 10);
@@ -28,7 +28,7 @@ namespace Aplikacja_muzyczna.DBConnect.Track
             {
                 string sqlLoad = @"SELECT TrackId from dbo.Track where " +
                 " ReleaseDate = '" + DateWithoutGarbage + "' AND " +
-                " ArtistId = '" + model.ArtistId + "' AND " +
+                " ArtistIdFK = '" + model.ArtistIdFK + "' AND " +
                 " Title = '" + model.Title + "' ;";
                 int AddedId = DataAccess.LoadData<DetailTracks>(sqlLoad).First().TrackId;
                 return AddedId;

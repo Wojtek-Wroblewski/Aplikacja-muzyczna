@@ -25,7 +25,7 @@ namespace Aplikacja_muzyczna.DBConnect.Artist
 
         public static string SingleNamesFromId (string ArtistId)
         {
-            string sql = @"select Firstname, Lastname from  Artist where ArtistId = " + ArtistId + ";";
+            string sql = @"select Firstname, Lastname from  dbo.Artist where ArtistId = " + ArtistId + ";";
             DetailArtist Single = new DetailArtist();
             Single = DataAccess.LoadData<DetailArtist>(sql).First() ;
             return Single.Firstname + " " + Single.Lastname;

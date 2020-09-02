@@ -14,8 +14,8 @@ namespace Aplikacja_muzyczna.Models
         public string Title { get; set; }
         [Key]
         public int TrackId { get; set; }
-        [ForeignKey("ArtistId")]
-        public int ArtistId { get; set; }
+        [ForeignKey("ArtistIdFK")]
+        public int ArtistIdFK { get; set; }
         public DetailArtist Artist { get; set; }
         [Display(Name = "Insert date of first release")]
         [Required(ErrorMessage = "Field can't be empty")]
@@ -32,8 +32,8 @@ namespace Aplikacja_muzyczna.Models
         public string Title { get; set; }
         [Key]
         public int TrackId { get; set; }
-        [ForeignKey("ArtistId")]
-        public int ArtistId { get; set; }
+        [ForeignKey("ArtistIdFK")]
+        public int ArtistIdFK { get; set; }
         [Display (Name = "Artist")]
         public DetailArtist Artist { get; set; }
         [Display(Name = "First release")]

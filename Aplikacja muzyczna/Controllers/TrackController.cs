@@ -71,14 +71,31 @@ namespace Aplikacja_muzyczna.Controllers
             model = DBConnect.Artist.ListingArtistDB.SearchArtist(searchString);
             return View(model);
         }
-        public ActionResult DetailsTrack (DetailTracks model, int TrackId)
+        public ActionResult DetailsTrack (DetailTracks model)
         {
-            /*TODO
-             Zamiast Trackid imie i nazwisko artysty, może jego zdjęcie?
-             */
-           model = DBConnect.DataAccess.LoadData<DetailTracks>(@"select * from dbo.Track where TrackId = " + TrackId.ToString() + ";").First();
+            if (model.TrackId != null)
+            {
+                model = DetailTrackDB.DetailFromId(model.TrackId);
+            }
+            else
+            {
+                return RedirectToAction("ListTrack");
+            }
 
             return View(model);
+        }
+        
+        public ActionResult ListTrack (List<DetailTracks> List)
+        {
+            if (List != null)
+            {
+                return View(List);
+            }
+            else
+            {
+                //List = /*TODO dodać wszystkie z listy*/
+                return View();
+            }
         }
     }
 }
