@@ -278,6 +278,8 @@
     <Content Include="Views\Track\SearchArtist.cshtml" />
     <Content Include="Views\Track\DetailsTrack.cshtml" />
     <Content Include="Views\Track\ListTrack.cshtml" />
+    <Content Include="Views\Track\FailedTrack.cshtml" />
+    <Content Include="Views\Track\EditTrack.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Aplikacja_muzyczna.Models.DetailTracks>
+﻿@model IEnumerable<Aplikacja_muzyczna.Models.DetailTrackWithArtist>
 
 @{
     ViewBag.Title = "ListTrack";
@@ -15,13 +15,13 @@
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th style=" padding:15px;">
-            @Html.DisplayNameFor(model => model.ArtistIdFK)
+            @Html.DisplayNameFor(model => model.Firstname)
+        </th>
+        <th style=" padding:15px;">
+            @Html.DisplayNameFor(model => model.Lastname)
         </th>
         <th style=" padding:15px;">
             @Html.DisplayNameFor(model => model.ReleaseDate)
-        </th>
-        <th style=" padding:15px;">
-            @Html.DisplayNameFor(model => model.SearchString)
         </th>
         <th style=" padding:15px;"></th>
     </tr>
@@ -32,18 +32,18 @@
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td style=" padding:15px;">
-            @Html.DisplayFor(modelItem => item.ArtistIdFK)
+            @Html.DisplayFor(modelItem => item.Firstname)
+        </td>
+        <td style=" padding:15px;">
+            @Html.DisplayFor(modelItem => item.Lastname)
         </td>
         <td style=" padding:15px;">
             @Html.DisplayFor(modelItem => item.ReleaseDate)
         </td>
         <td style=" padding:15px;">
-            @Html.DisplayFor(modelItem => item.SearchString)
-        </td>
-        <td style=" padding:15px;">
-            @Html.ActionLink("Edit", "Edit", new { id=item.TrackId }) 
-            @Html.ActionLink("Details", "Details", new { id=item.TrackId }) 
-            @Html.ActionLink("Delete", "Delete", new { id=item.TrackId })
+            @Html.ActionLink("Edit", "EditTrack", new { TrackId = item.TrackId }) 
+            @Html.ActionLink("Details", "DetailsTrack", new { TrackId = item.TrackId }) 
+            @Html.ActionLink("Delete", "Delete", new { TrackId = item.TrackId })
         </td>
     </tr>
 }

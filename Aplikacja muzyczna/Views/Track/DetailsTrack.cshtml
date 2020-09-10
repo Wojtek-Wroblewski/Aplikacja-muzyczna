@@ -1,4 +1,4 @@
-﻿@model Aplikacja_muzyczna.Models.DetailTracks
+﻿@model Aplikacja_muzyczna.Models.DetailTrackWithArtist
 
 @{
     ViewBag.Title = "DetailTracks";
@@ -8,58 +8,59 @@
 
     <h4>DetailTracks</h4>
     <div class="form-horizontal">
-	<div class ="container-fluid">
-		<div clas="row" style="margin-top:15px;">
-			<div class="col-xs-4" style ="font-weight:bold;">
-				@Html.DisplayNameFor(model => model.Title)
-			</div>
+        <div class="container-fluid">
+            <div clas="row" style="margin-top:15px;">
+                <div class="col-xs-4" style="font-weight:bold;">
+                    @Html.DisplayNameFor(model => model.Title)
+                </div>
 
-			<div class="col-xs-8">
-				@Html.DisplayFor(model => model.Title)
-			</div>
-		</div>
-	</div>
-	<div class ="container-fluid">
-		<div clas="row" style="margin-top:15px;">
-			<div class="col-xs-4" style ="font-weight:bold;">
-				@Html.DisplayNameFor(model => model.ArtistIdFK)
-			</div>
+                <div class="col-xs-8">
+                    @Html.DisplayFor(model => model.Title)
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div clas="row" style="margin-top:15px;">
+                <div class="col-xs-4" style="font-weight:bold;">
+                    @Html.DisplayNameFor(model => model.Firstname)
+                </div>
 
-			<div class="col-xs-8">
-				@Html.DisplayFor(model => model.ArtistIdFK)
-			</div>
-		</div>
-	</div>
-	<div class ="container-fluid">
-		<div clas="row" style="margin-top:15px;">
-			<div class="col-xs-4" style ="font-weight:bold;">
-				@Html.DisplayNameFor(model => model.ReleaseDate)
-			</div>
+                <div class="col-xs-8">
+                    @Html.DisplayFor(model => model.Firstname)
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div clas="row" style="margin-top:15px;">
+                <div class="col-xs-4" style="font-weight:bold;">
+                    @Html.DisplayNameFor(model => model.Lastname)
+                </div>
 
-			<div class="col-xs-8">
-				@Html.DisplayFor(model => model.ReleaseDate)
-			</div>
-		</div>
-	</div>
-	<div class ="container-fluid">
-		<div clas="row" style="margin-top:15px;">
-			<div class="col-xs-4" style ="font-weight:bold;">
-				@Html.DisplayNameFor(model => model.SearchString)
-			</div>
+                <div class="col-xs-8">
+                    @Html.DisplayFor(model => model.Lastname)
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div clas="row" style="margin-top:15px;">
+                <div class="col-xs-4" style="font-weight:bold;">
+                    @Html.DisplayNameFor(model => model.ReleaseDate)
+                </div>
 
-			<div class="col-xs-8">
-				@Html.DisplayFor(model => model.SearchString)
-			</div>
-		</div>
-	</div>
-		<div class="container-fluid" style="padding:15px;">
-			<div clas="row" >
+                <div class="col-xs-8">
+                    @Html.DisplayFor(model => model.ReleaseDate)
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid" style="padding:15px;">
+            <div clas="row">
                 <div class="col-xs-offset-1 col-xs-6">
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TrackId }) |
-    @Html.ActionLink("Back to List", "Index")
-	
+                    @Html.ActionLink("Edit", "Edit", new { TrackId = Model.TrackId }) |
+                    @Html.ActionLink("Back to List", "ListTrack")
+
 
                 </div>
             </div>
-		</div>
-</div>	
+        </div>
+    </div>	

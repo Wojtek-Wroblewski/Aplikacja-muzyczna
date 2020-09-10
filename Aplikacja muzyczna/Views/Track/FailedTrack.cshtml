@@ -1,0 +1,20 @@
+﻿@model Aplikacja_muzyczna.Models.DetailTrackWithArtist
+
+@{
+    ViewBag.Title = "FailedTrack";
+}
+
+<h2>FailedTrack</h2>
+
+<div>
+    <h4>DetailTrackWithArtist</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <h1>Failed to add Track to database, please try again later.</h1>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

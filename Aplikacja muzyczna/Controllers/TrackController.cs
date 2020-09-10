@@ -46,8 +46,7 @@ namespace Aplikacja_muzyczna.Controllers
                             return RedirectToAction("DetailsTrack", new { TrackId = JustaddedTrack });
                         }else
                         {
-                            /*TODO
-                             jakiś error skrin ze sie nie dodało*/
+                            return RedirectToAction("FailedTrack");
                         }
                     }
                     break;
@@ -71,9 +70,9 @@ namespace Aplikacja_muzyczna.Controllers
             model = DBConnect.Artist.ListingArtistDB.SearchArtist(searchString);
             return View(model);
         }
-        public ActionResult DetailsTrack (DetailTracks model)
+        public ActionResult DetailsTrack (DetailTrackWithArtist model)
         {
-            if (model.TrackId != null)
+            if (model.TrackId != 0)
             {
                 model = DetailTrackDB.DetailFromId(model.TrackId);
             }
@@ -85,7 +84,7 @@ namespace Aplikacja_muzyczna.Controllers
             return View(model);
         }
         
-        public ActionResult ListTrack (List<DetailTracks> List)
+        public ActionResult ListTrack (List<DetailTrackWithArtist> List)
         {
             if (List != null)
             {
@@ -93,9 +92,61 @@ namespace Aplikacja_muzyczna.Controllers
             }
             else
             {
-                //List = /*TODO dodać wszystkie z listy*/
-                return View();
+                List = DetailTrackDB.ListAll();
+
+                return View(List);
             }
+        }
+        public ActionResult EditTrack (DetailTrackWithArtist model)
+        {
+            if (model.TrackId != 0)
+            {
+                model = DetailTrackDB.DetailFromId(model.TrackId);
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("ListTrack");
+            }
+            return View();
+
+        }
+        [HttpPost]
+        public ActionResult EditTrack(DetailTrackWithArtist model,string submit )
+        {
+            if (model.TrackId != 0)
+            {
+                switch (submit)
+                {
+                    case "Save":
+                        if (ModelState.IsValid)
+                        {
+                            /*TODO update*/
+                        }
+                        break;
+                    case "Search":
+                        if (model.Title != null)
+                            TempData["TrackTitle"] = model.Title;
+                        if (model.ReleaseDate != null)
+                        {
+                            TempData["TrackDate"] = TrackFunctions.Format_rrrrmmdd(model.ReleaseDate);
+                        }
+                        return RedirectToAction("SearchArtist", new { searchString = model.SearchString });
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                return RedirectToAction("ListTrack");
+            }
+            return View();
+
+        }
+        public ActionResult FailedTrack ()
+        {
+            return View();
         }
     }
 }

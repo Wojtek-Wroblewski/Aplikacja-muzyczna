@@ -8,14 +8,20 @@ namespace Aplikacja_muzyczna.DBConnect.Track
 {
     public class DetailTrackDB
     {
-        public static DetailTracks DetailFromId(int TrackId)
+        public static DetailTrackWithArtist DetailFromId(int TrackId)
+        {
+            string sql = @"Select dbo.Artist.ArtistId,  dbo.Artist.Firstname, dbo.Artist.Lastname  , dbo.Track.ReleaseDate, dbo.Track.Title,dbo.Track.TrackId from Track left join Artist ON Track.ArtistIdFK = Artist.ArtistId where Trackid = '"+TrackId+"';";
+
+
+            return DataAccess.LoadData<DetailTrackWithArtist>(sql).First();
+        }
+        public static List<DetailTrackWithArtist>  ListAll ()
         {
 
-            string sql = @"select * from dbo.Track where TrackId=" + TrackId+ ";";
+            string sql = @"Select dbo.Artist.ArtistId,  dbo.Artist.Firstname, dbo.Artist.Lastname  , dbo.Track.ReleaseDate, dbo.Track.Title,dbo.Track.TrackId from Track left join Artist ON Track.ArtistIdFK = Artist.ArtistId ;";
 
 
-            return DataAccess.LoadData<DetailTracks>(sql).First();
+            return DataAccess.LoadData<DetailTrackWithArtist>(sql);
         }
-
     }
 }
