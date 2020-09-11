@@ -24,6 +24,34 @@ namespace Aplikacja_muzyczna.Functions
             CorrectDate[2] = YearCorrection[0];
             return CorrectDate[2] + '-' + CorrectDate[1] + '-' + CorrectDate[0];
         }
-       // public static string 
+        public static string ModifyTrackSring(DetailTrackWithArtist NewModel, DetailTrackWithArtist Oldmodel)
+        {
+            {
+
+                string sql = @"UPDATE dbo.Artist Set ";
+                if (NewModel.Title != null)
+                    if (NewModel.Title != Oldmodel.Title)
+                    {
+                        sql += "Title = @Title, ";
+                    }
+
+
+                if (NewModel.ReleaseDate != null)
+                    if (NewModel.ReleaseDate != Oldmodel.ReleaseDate)
+                    {
+                        sql += "ReleaseDate = @ReleaseDate, ";
+                    }
+
+                if (NewModel.ArtistIdFK != Oldmodel.ArtistIdFK)
+                {
+                    sql += "ArtistIdFK = @ArtistIdFK, ";
+                }
+
+                sql = sql.Remove(sql.Length - 2, 2);
+                sql += "  Where TrackId = @TrackId; ";
+                return sql;
+            }
+
+        }
     }
 }

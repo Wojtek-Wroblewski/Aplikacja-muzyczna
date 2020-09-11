@@ -15,7 +15,7 @@ namespace Aplikacja_muzyczna.DBConnect.Artist
         {
 
             DetailArtist OldModel = DetailArtistDB.DetailFromId(NewModel.ArtistId);
-            string sql = ArtistFunction.ModifyArtistSring(NewModel, OldModel);
+            string sql = ArtistFunctions.ModifyArtistSring(NewModel, OldModel);
 
             DataAccess.SaveData(sql, NewModel);
 

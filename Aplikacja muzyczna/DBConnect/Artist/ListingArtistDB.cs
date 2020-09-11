@@ -19,7 +19,7 @@ namespace Aplikacja_muzyczna.DBConnect.Artist
 
         public static List<DetailArtist> SearchArtist(string SearchString)
         {
-            string sql = ArtistFunction.SearchStringArtist(SearchString);
+            string sql = ArtistFunctions.SearchStringArtist(SearchString);
             return DataAccess.LoadData<DetailArtist>(sql);
         }
 

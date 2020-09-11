@@ -65,7 +65,7 @@ namespace Aplikacja_muzyczna.Controllers
             {
                 if (model.File != null)
                 {
-                    Tuple<byte[], string> Photo_error = ArtistFunction.VerifyPhoto( model.File);
+                    Tuple<byte[], string> Photo_error = ArtistFunctions.VerifyPhoto( model.File);
                     if (Photo_error.Item1 == null)
                     { 
                         ModelState.AddModelError("", Photo_error.Item2);
@@ -117,7 +117,7 @@ namespace Aplikacja_muzyczna.Controllers
             if (model.File != null)
             {
                 var Photo_error = new Tuple<byte[], string>(null, null);
-                Photo_error = ArtistFunction.VerifyPhoto(model.File);
+                Photo_error = ArtistFunctions.VerifyPhoto(model.File);
                 if (Photo_error.Item2 != null)
                 {
                     ModelState.AddModelError("", Photo_error.Item2);

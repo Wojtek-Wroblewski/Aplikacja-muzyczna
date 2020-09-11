@@ -184,8 +184,9 @@
     <Compile Include="DBConnect\DataAccess.cs" />
     <Compile Include="DBConnect\Track\AddTrackDB.cs" />
     <Compile Include="DBConnect\Track\DetailTrackDB.cs" />
+    <Compile Include="DBConnect\Track\EditTrackDB.cs" />
     <Compile Include="DBConnect\Track\ListingTrackDB.cs" />
-    <Compile Include="Functions\ArtistFunction.cs" />
+    <Compile Include="Functions\ArtistFunctions.cs" />
     <Compile Include="Functions\Cookies.cs" />
     <Compile Include="Functions\Helper.cs" />
     <Compile Include="Functions\Misc.cs" />
@@ -275,11 +276,12 @@
     <Content Include="Views\Artist\EditArtist.cshtml" />
     <Content Include="Views\Artist\DeleteArtist.cshtml" />
     <Content Include="Views\Track\CreateTrack.cshtml" />
-    <Content Include="Views\Track\SearchArtist.cshtml" />
+    <Content Include="Views\Track\SearchArtistAdd.cshtml" />
     <Content Include="Views\Track\DetailsTrack.cshtml" />
     <Content Include="Views\Track\ListTrack.cshtml" />
     <Content Include="Views\Track\FailedTrack.cshtml" />
     <Content Include="Views\Track\EditTrack.cshtml" />
+    <Content Include="Views\Track\SearchArtistEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

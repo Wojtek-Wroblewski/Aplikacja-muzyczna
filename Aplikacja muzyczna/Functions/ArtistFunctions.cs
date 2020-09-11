@@ -8,7 +8,7 @@ using Aplikacja_muzyczna.DBConnect.Artist;
 
 namespace Aplikacja_muzyczna.Functions
 {
-    public class ArtistFunction
+    public class ArtistFunctions
     {
 
         public static byte[] PhotoBytefromfile(HttpPostedFileBase File)
@@ -67,8 +67,6 @@ namespace Aplikacja_muzyczna.Functions
                 }
             sql = sql.Remove(sql.Length - 2, 2);
             sql += "  Where ArtistId = @ArtistId; ";
-
-
             return sql;
         }
 
@@ -76,7 +74,7 @@ namespace Aplikacja_muzyczna.Functions
         {
             byte[] Photo = null;
             string Error = null;
-            Photo = ArtistFunction.PhotoBytefromfile(File);
+            Photo = ArtistFunctions.PhotoBytefromfile(File);
             if (Photo.Length == 1)
             {
                 if (Photo.ToString()[0] == 'S')

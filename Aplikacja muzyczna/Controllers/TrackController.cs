@@ -57,14 +57,14 @@ namespace Aplikacja_muzyczna.Controllers
                     {
                         TempData["TrackDate"] = TrackFunctions.Format_rrrrmmdd(model.ReleaseDate);
                     }
-                    return RedirectToAction("SearchArtist", new { searchString = model.SearchString });
+                    return RedirectToAction("SearchArtistAdd", new { searchString = model.SearchString });
                     break;
                 default:
                     break;
             }
             return View();
         }
-        public ActionResult SearchArtist (string searchString)
+        public ActionResult SearchArtistAdd (string searchString)
         {
             List<DetailArtist> model = new List<DetailArtist>();
             model = DBConnect.Artist.ListingArtistDB.SearchArtist(searchString);
@@ -121,17 +121,20 @@ namespace Aplikacja_muzyczna.Controllers
                     case "Save":
                         if (ModelState.IsValid)
                         {
-                            /*TODO update*/
+                            model = EditTrackDB.EditTrack(model);
                         }
                         break;
                     case "Search":
+
+                        /*TODO cały mechanizm od szukajki */
                         if (model.Title != null)
-                            TempData["TrackTitle"] = model.Title;
-                        if (model.ReleaseDate != null)
-                        {
-                            TempData["TrackDate"] = TrackFunctions.Format_rrrrmmdd(model.ReleaseDate);
-                        }
-                        return RedirectToAction("SearchArtist", new { searchString = model.SearchString });
+                              TempData["TrackTitle"] = model.Title;
+                            if (model.ReleaseDate != null)
+                            {
+                                TempData["TrackDate"] = TrackFunctions.Format_rrrrmmdd(model.ReleaseDate);
+                            }
+                        return RedirectToAction("SearchArtistEdit", new { searchString = model.SearchString });
+
                         break;
                     default:
                         break;
@@ -143,6 +146,12 @@ namespace Aplikacja_muzyczna.Controllers
             }
             return View();
 
+        }
+        public ActionResult SearchArtistEdit(string searchString)
+        {
+            List<DetailArtist> model = new List<DetailArtist>();
+            model = DBConnect.Artist.ListingArtistDB.SearchArtist(searchString);
+            return View(model);
         }
         public ActionResult FailedTrack ()
         {

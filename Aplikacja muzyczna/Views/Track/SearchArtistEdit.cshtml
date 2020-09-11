@@ -1,0 +1,50 @@
+﻿
+@model IEnumerable<Aplikacja_muzyczna.Models.DetailArtist>
+@{
+    ViewBag.Title = "Dodawanie Utwóru";
+}
+
+
+@using (Html.BeginForm())
+{
+    <div class="horizontal" style="margin-top:50px; margin-bottom:50px;">
+        <center>
+            <h2 style="margin-bottom:0px;">Creating </h2>
+            <h3 style="margin-top:0px;"> Track</h3>
+            <hr>
+        </center>
+        Searched Artist at given search term
+
+        @foreach (var item in Model)
+        {
+            <table>
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.Firstname + " " + item.Lastname, "CreateTrack", new { ArtistIdFK = item.ArtistId }, null /* html attributes */)
+                    </td>
+                </tr>
+            </table>
+        }
+        @if (Model.Count() == 0)
+        {<div class="row" style="color:#fff; margin:10px 0px; text-align:center; font-size:100%;">
+                We didn't found that artist
+            </div>
+        }
+        <div class="row">
+            <a href="@Url.Action("EditTrack", "Track")" class="btn btn-default" style="margin-right:0px;width:auto;padding:5px 10px;font-size:100%;">Create new Artist</a>
+        </div>
+
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+@*TODO
+    Zrobić taka sama strone, żeby przenosiło na powrót do wyszukiwadełka od edycji artysty czy jakoś tak 
+    *@
