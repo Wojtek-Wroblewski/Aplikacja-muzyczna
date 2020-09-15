@@ -30,6 +30,8 @@ namespace Aplikacja_muzyczna
             bundles.Add(new ScriptBundle("~/bundles/dropdown_hover").Include(
                 "~/Scripts/Custom/dropdown_hover.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/edit_field").Include(
+                "~/Script/Custom/edit_field.js"));
         }
     }
 }

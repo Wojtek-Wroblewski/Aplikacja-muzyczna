@@ -58,7 +58,7 @@ namespace Aplikacja_muzyczna.Controllers
                         TempData["TrackDate"] = TrackFunctions.Format_rrrrmmdd(model.ReleaseDate);
                     }
                     return RedirectToAction("SearchArtistAdd", new { searchString = model.SearchString });
-                    break;
+
                 default:
                     break;
             }
@@ -93,7 +93,6 @@ namespace Aplikacja_muzyczna.Controllers
             else
             {
                 List = DetailTrackDB.ListAll();
-
                 return View(List);
             }
         }
@@ -108,11 +107,10 @@ namespace Aplikacja_muzyczna.Controllers
             {
                 return RedirectToAction("ListTrack");
             }
-            return View();
 
         }
         [HttpPost]
-        public ActionResult EditTrack(DetailTrackWithArtist model,string submit )
+        public ActionResult EditTrack(DetailTrackWithArtist model,string submit, string Search)
         {
             if (model.TrackId != 0)
             {
@@ -134,8 +132,7 @@ namespace Aplikacja_muzyczna.Controllers
                                 TempData["TrackDate"] = TrackFunctions.Format_rrrrmmdd(model.ReleaseDate);
                             }
                         return RedirectToAction("SearchArtistEdit", new { searchString = model.SearchString });
-
-                        break;
+                        
                     default:
                         break;
                 }
