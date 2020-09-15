@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = "EditTrack";
 }
+
+@Scripts.Render("~/bundles/edit_field")
+
 <!---
         <h2>EditTrack</h2>
 --->
@@ -133,9 +136,9 @@
 
 <div class="control-group">
     <label for="name" class="control-label">
-        <p class="text-info">Vipin</p>
+        <p class="text-info">@Html.DisplayFor(model=>model.Title)</p>
     </label>
-    <input type="text" class="input-medium" style="display:none;" placeholder="Vipin">
+    <input type="text" class="input-medium" style="display:none;" value=@Html.DisplayFor(model=>model.Title)>
     <div class="controls-edit">
         <a href="#" onclick="Edit(this);">Edit</a>
 
@@ -145,44 +148,44 @@
 
     </div>
 </div>
-
+@*TODO wrzucic to vo o tutaj wyzej do formsa *@
 
 
 <script>
-        /*
-        function Edit(element) {
+            /*
+            function Edit(element) {
 
-            console.log("edit dupa ");
-            var parent = $(element).parent().parent();
-            var placeholder = $(parent).find('.text-info').text();
-            //hide label
-            $(parent).find('label').hide();
-            //show input, set placeholder
-            var input = $(parent).find('input[type="text"]');
-            var edit = $(parent).find('.controls-edit');
-            var update = $(parent).find('.controls-update');
-            $(input).show();
-            $(edit).hide();
-            $(update).show();
-            //$(input).attr('placeholder', placeholder);
-        }
+                console.log("edit dupa ");
+                var parent = $(element).parent().parent();
+                var placeholder = $(parent).find('.text-info').text();
+                //hide label
+                $(parent).find('label').hide();
+                //show input, set placeholder
+                var input = $(parent).find('input[type="text"]');
+                var edit = $(parent).find('.controls-edit');
+                var update = $(parent).find('.controls-update');
+                $(input).show();
+                $(edit).hide();
+                $(update).show();
+                //$(input).attr('placeholder', placeholder);
+            }
 
-        function Update(element) {
+            function Update(element) {
 
-            console.log("update dupa");
-            var parent = $(element).parent().parent();
-            var placeholder = $(parent).find('.text-info').text();
-            //hide label
-            $(parent).find('label').show();
-            //show input, set placeholder
-            var input = $(parent).find('input[type="text"]');
-            var edit = $(parent).find('.controls-edit');
-            var update = $(parent).find('.controls-update');
-            $(input).hide();
-            $(edit).show();
-            $(update).hide();
-            //$(input).attr('placeholder', placeholder);
-            $(parent).find('label').text($(input).val());
-        }
-        */
+                console.log("update dupa");
+                var parent = $(element).parent().parent();
+                var placeholder = $(parent).find('.text-info').text();
+                //hide label
+                $(parent).find('label').show();
+                //show input, set placeholder
+                var input = $(parent).find('input[type="text"]');
+                var edit = $(parent).find('.controls-edit');
+                var update = $(parent).find('.controls-update');
+                $(input).hide();
+                $(edit).show();
+                $(update).hide();
+                //$(input).attr('placeholder', placeholder);
+                $(parent).find('label').text($(input).val());
+            }
+            */
 </script>
