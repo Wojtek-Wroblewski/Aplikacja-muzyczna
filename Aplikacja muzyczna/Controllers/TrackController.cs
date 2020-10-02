@@ -55,7 +55,7 @@ namespace Aplikacja_muzyczna.Controllers
                         TempData["TrackTitle"] = model.Title;
                     if (model.ReleaseDate != null)
                     {
-                        TempData["TrackDate"] = TrackFunctions.Format_rrrrmmdd(model.ReleaseDate);
+                        TempData["TrackDate"] = model.ReleaseDate;
                     }
                     return RedirectToAction("SearchArtistAdd", new { searchString = model.SearchString });
 
@@ -96,15 +96,17 @@ namespace Aplikacja_muzyczna.Controllers
                 return View(List);
             }
         }
-        public ActionResult EditTrack (DetailTrackWithArtist model)
+        public ActionResult EditTrack (EditTrack model)
         {
             if (model.TrackId != 0)
             {
-                model = DetailTrackDB.DetailFromId(model.TrackId);
+                model = DetailTrackDB.DetailTracktoEdit(model.TrackId);
                 return View(model);
             }
             else
             {
+                //model = DetailTrackDB.DetailTracktoEdit(13);
+              //  return View(model);
                 return RedirectToAction("ListTrack");
             }
 
@@ -129,7 +131,7 @@ namespace Aplikacja_muzyczna.Controllers
                               TempData["TrackTitle"] = model.Title;
                             if (model.ReleaseDate != null)
                             {
-                                TempData["TrackDate"] = TrackFunctions.Format_rrrrmmdd(model.ReleaseDate);
+                                TempData["TrackDate"] = model.ReleaseDate;
                             }
                         return RedirectToAction("SearchArtistEdit", new { searchString = model.SearchString });
                         

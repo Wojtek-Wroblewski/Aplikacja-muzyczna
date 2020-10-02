@@ -1,191 +1,127 @@
-﻿@model Aplikacja_muzyczna.Models.DetailTrackWithArtist
+﻿@model Aplikacja_muzyczna.Models.EditTrack
 
 @{
     ViewBag.Title = "EditTrack";
 }
 
-@Scripts.Render("~/bundles/edit_field")
-
 <!---
-        <h2>EditTrack</h2>
+		<h2>EditTrack</h2>
 --->
 
-@using (Html.BeginForm())
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
 
-    <div class="form-horizontal">
 
+    <h2 style="text-align:center;padding-top:15px;">EditTrack</h2>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <h2 style="text-align:center;padding-top:15px;">DetailTrackWithArtist</h2>
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            <div class="row">
-                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="form-group">
+        <div class="row">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
             </div>
-            <div class="row">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-8">
-                    @Html.DisplayFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-                </div>
+            <div class="col-xs-8">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
             </div>
         </div>
-
-
-
-
-
-        <div class="form-group">
-            <div class="row">
-                @Html.LabelFor(model => model.ReleaseDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            </div>
-            <div class="row">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-8">
-                    @Html.EditorFor(model => model.ReleaseDate, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ReleaseDate, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="row">
-                @Html.LabelFor(model => model.SearchString, htmlAttributes: new { @class = "control-label col-md-2" })
-            </div>
-            <div class="row">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-8">
-                    @Html.EditorFor(model => model.SearchString, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.SearchString, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-xs-offset-5 col-xs-1" style="padding:0px;">
-                            <input type="submit" value="Search" name="submit" id="submit" class="btn btn-default" style="margin:10px 0px 10px 0px ;padding-left:20px;padding-right:20px;" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="row">
-                @Html.LabelFor(model => model.Firstname, htmlAttributes: new { @class = "control-label col-md-2" })
-            </div>
-            <div class="row">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-8">
-                    @Html.DisplayFor(model => model.Firstname, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Firstname, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="row">
-                @Html.LabelFor(model => model.Lastname, htmlAttributes: new { @class = "control-label col-md-2" })
-            </div>
-            <div class="row">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-8">
-                    @Html.DisplayFor(model => model.Lastname, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Lastname, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="row">
-                @Html.LabelFor(model => model.ArtistId, htmlAttributes: new { @class = "control-label col-md-2" })
-            </div>
-            <div class="row">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-8">
-                    @Html.EditorFor(model => model.ArtistId, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ArtistId, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xs-offset-1 col-xs-3" style="margin:20px 0 20px 75px ; ">
-                        @Html.ActionLink("Back to List", "Index")
-                    </div>
-                    <div class="col-xs-offset-5 col-xs-1" style="padding:0px;">
-                        <input type="submit" name="submit" id="submit" value="Save" class="btn btn-default" style="margin:10px 0px 10px 0px ;padding-left:20px;padding-right:20px;" />
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
-}
 
 
-
-<div class="control-group">
-    <label for="name" class="control-label">
-        <p class="text-info">@Html.DisplayFor(model=>model.Title)</p>
-    </label>
-    <input type="text" class="input-medium" style="display:none;" value=@Html.DisplayFor(model=>model.Title)>
-    <div class="controls-edit">
-        <a href="#" onclick="Edit(this);">Edit</a>
-
+    <div class="form-group">
+        <div class="row">
+            @Html.LabelFor(model => model.ReleaseDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
+            </div>
+            <div class="col-xs-8">
+                @Html.EditorFor(model => model.ReleaseDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ReleaseDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
     </div>
-    <div class="controls-update" style="display:none;">
-        <a href="#" onclick="Update(this);">Update</a>
 
+    <div class="form-group">
+        <div class="row">
+            @Html.LabelFor(model => model.Firstname, htmlAttributes: new { @class = "control-label col-md-2" })
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
+            </div>
+            <div class="col-xs-8">
+                @Html.DisplayFor(model => model.Firstname, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Firstname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            @Html.LabelFor(model => model.Lastname, htmlAttributes: new { @class = "control-label col-md-2" })
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
+            </div>
+            <div class="col-xs-8">
+                @Html.DisplayFor(model => model.Lastname, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Lastname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="row">
+            @Html.LabelFor(model => model.SearchString, htmlAttributes: new { @class = "control-label col-md-2" })
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
+            </div>
+            <div class="col-xs-8">
+                @Html.EditorFor(model => model.SearchString, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SearchString, "", new { @class = "text-danger" })
+            </div>
+        </div>                
+        <div class="col-xs-offset-5 col-xs-1" style="padding:0px;">
+            <input type="submit" value="Search" class="btn btn-default" style="margin:10px 0px 10px 0px ;padding-left:20px;padding-right:20px;" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            @Html.LabelFor(model => model.ArtistId, htmlAttributes: new { @class = "control-label col-md-2" })
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
+            </div>
+            <div class="col-xs-8">
+                @Html.EditorFor(model => model.ArtistId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ArtistId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="form-group">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-offset-1 col-xs-3" style="margin:20px 0 20px 75px ; ">
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+                <div class="col-xs-offset-5 col-xs-1" style="padding:0px;">
+                    <input type="submit" value="Save" class="btn btn-default" style="margin:10px 0px 10px 0px ;padding-left:20px;padding-right:20px;" />
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-@*TODO wrzucic to vo o tutaj wyzej do formsa *@
-
-
-<script>
-            /*
-            function Edit(element) {
-
-                console.log("edit dupa ");
-                var parent = $(element).parent().parent();
-                var placeholder = $(parent).find('.text-info').text();
-                //hide label
-                $(parent).find('label').hide();
-                //show input, set placeholder
-                var input = $(parent).find('input[type="text"]');
-                var edit = $(parent).find('.controls-edit');
-                var update = $(parent).find('.controls-update');
-                $(input).show();
-                $(edit).hide();
-                $(update).show();
-                //$(input).attr('placeholder', placeholder);
-            }
-
-            function Update(element) {
-
-                console.log("update dupa");
-                var parent = $(element).parent().parent();
-                var placeholder = $(parent).find('.text-info').text();
-                //hide label
-                $(parent).find('label').show();
-                //show input, set placeholder
-                var input = $(parent).find('input[type="text"]');
-                var edit = $(parent).find('.controls-edit');
-                var update = $(parent).find('.controls-update');
-                $(input).hide();
-                $(edit).show();
-                $(update).hide();
-                //$(input).attr('placeholder', placeholder);
-                $(parent).find('label').text($(input).val());
-            }
-            */
-</script>
+}

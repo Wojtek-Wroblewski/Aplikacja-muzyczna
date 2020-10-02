@@ -3,6 +3,7 @@
     console.log("edit");
     var parent = $(element).parent().parent();
     var placeholder = $(parent).find('.text-info').text();
+    console.log(parent);
     //hide label
     $(parent).find('label').hide();
     //show input, set placeholder

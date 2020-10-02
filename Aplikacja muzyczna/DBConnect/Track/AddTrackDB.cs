@@ -20,14 +20,10 @@ namespace Aplikacja_muzyczna.DBConnect.Track
             string sqlSave = @"INSERT into dbo.Track (ArtistIdFK, ReleaseDate, Title) values (@ArtistIdFK, @ReleaseDate, @Title);";
 
             int Numberofsaves = DataAccess.SaveData(sqlSave, data);
-            string DateWithoutGarbage = model.ReleaseDate.ToString().Substring(0, 10);
-            char separator = '.';
-            string[] temp = DateWithoutGarbage.Split(separator);
-            DateWithoutGarbage = temp[1] + separator + temp[0] + separator + temp[2];
             if (Numberofsaves == 1)
             {
                 string sqlLoad = @"SELECT TrackId from dbo.Track where " +
-                " ReleaseDate = '" + DateWithoutGarbage + "' AND " +
+                " ReleaseDate = '" + model.ReleaseDate + "' AND " +
                 " ArtistIdFK = '" + model.ArtistIdFK + "' AND " +
                 " Title = '" + model.Title + "' ;";
                 int AddedId = DataAccess.LoadData<DetailTracks>(sqlLoad).First().TrackId;

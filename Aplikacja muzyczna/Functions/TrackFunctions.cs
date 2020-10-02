@@ -15,7 +15,7 @@ namespace Aplikacja_muzyczna.Functions
             return null;
         }
 
-        public static string Format_rrrrmmdd(DateTimeOffset ReleaseDate)
+        public static string OBSOLETEFormat_rrrrmmdd(string ReleaseDate)
         {
             string WrongDate = ReleaseDate.ToString();
             char separator = '.';
