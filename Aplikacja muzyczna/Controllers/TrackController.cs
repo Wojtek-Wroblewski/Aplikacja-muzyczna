@@ -129,11 +129,13 @@ namespace Aplikacja_muzyczna.Controllers
 
                         /*TODO cały mechanizm od szukajki */
                         if (model.Title != null)
+                        { 
                               TempData["TrackTitle"] = model.Title;
+                        }
                             if (model.ReleaseDate != null)
-                            {
-                                TempData["TrackDate"] = model.ReleaseDate;
-                            }
+                        {
+                            Cookies.RememberDateFromModel(model.ReleaseDate);
+                        }
                         return RedirectToAction("SearchArtistEdit", new { searchString = model.SearchString });
                         
                     default:

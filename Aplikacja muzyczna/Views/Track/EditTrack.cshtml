@@ -42,7 +42,7 @@
             </div>
             <div class="col-xs-8">
 
-                @{var OldValue = Request.Cookies["RememberValueFromModel"];}
+                @{var OldValue = Request.Cookies["RememberDateFromModel"];}
                 @{var Today = Request.Cookies["DateNow"];}
                 @Html.EditorFor(model => model.ReleaseDate, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control", @max = Today.Value, @Value = OldValue.Value, @type = "date" } })
                 @Html.ValidationMessageFor(model => model.ReleaseDate, "", new { @class = "text-danger" })
@@ -93,7 +93,7 @@
             </div>
         </div>                
         <div class="col-xs-offset-5 col-xs-1" style="padding:0px;">
-            <input type="submit" value="Search" class="btn btn-default" style="margin:10px 0px 10px 0px ;padding-left:20px;padding-right:20px;" />
+            <input type="submit"id="submit" name ="submit"value="Search" class="btn btn-default" style="margin:10px 0px 10px 0px ;padding-left:20px;padding-right:20px;" />
         </div>
     </div>
 
@@ -121,7 +121,7 @@
                     @Html.ActionLink("Back to List", "Index")
                 </div>
                 <div class="col-xs-offset-5 col-xs-1" style="padding:0px;">
-                    <input type="submit" value="Save" class="btn btn-default" style="margin:10px 0px 10px 0px ;padding-left:20px;padding-right:20px;" />
+                    <input type="submit" id="submit" name ="submit" value="Save" class="btn btn-default" style="margin:10px 0px 10px 0px ;padding-left:20px;padding-right:20px;" />
                 </div>
             </div>
         </div>
