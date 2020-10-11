@@ -97,6 +97,7 @@ namespace Aplikacja_muzyczna.Controllers
                 int ArtistId = (int)Double.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
                 DetailArtist model = DetailArtistDB.DetailFromId(ArtistId);
                 Cookies.CreateDay(model.Birthdate);
+                Cookies.Today();
                 return View(model);
             }
             else

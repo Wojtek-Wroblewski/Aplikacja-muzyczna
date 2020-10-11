@@ -54,7 +54,9 @@
                 </div>
                 <div class="col-xs-8">
                     @{var Birth = Request.Cookies["BirthDate"];}
-                    @Html.EditorFor(model => model.Birthdate, new { htmlAttributes = new { @class = "form-control" , @max = Birth.Value, @Value = Birth.Value } })
+                    @{var Today = Request.Cookies["DateNow"];}
+                    
+                    @Html.EditorFor(model => model.Birthdate, new { htmlAttributes = new { @class = "form-control", @max = Today.Value, @Value = Birth.Value } })
                     @Html.ValidationMessageFor(model => model.Birthdate, "", new { @class = "text-danger" })
                 </div>
             </div>

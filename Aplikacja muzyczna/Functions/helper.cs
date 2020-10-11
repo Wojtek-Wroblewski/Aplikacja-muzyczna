@@ -5,15 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using Aplikacja_muzyczna.Functions;
 namespace System.Web.Mvc
 {
     public static class Helper
     {
         public static MvcHtmlString DisplayPhoto(this HtmlHelper html, byte[] Photo)
         {
-
-            //StringBuilder html;
-
                 if (Photo != null)
                 {
                     byte[] photo = Photo;
@@ -32,6 +30,11 @@ namespace System.Web.Mvc
                 return new MvcHtmlString(empty);
             }
 
+        }
+        public static string RemoveCookie(this HtmlHelper html, string CookieName)
+        {
+            Cookies.RemoveCookie(CookieName);
+            return null;
         }
 
 

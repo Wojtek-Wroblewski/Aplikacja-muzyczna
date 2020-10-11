@@ -20,7 +20,8 @@ namespace Aplikacja_muzyczna.Models
         [Display(Name = "Insert date of first release")]
         [Required(ErrorMessage = "Field can't be empty")]
         [DataType(DataType.Date)]
-        public string ReleaseDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
+        public DateTimeOffset ReleaseDate { get; set; }
         [Display(Name = "Search for an artist")]
         public string SearchString { get; set; }
     }
@@ -39,7 +40,7 @@ namespace Aplikacja_muzyczna.Models
         [Display(Name = "First release")]
         [Required(ErrorMessage = "Field can't be empty")]
         [DataType(DataType.Date)]
-        public string ReleaseDate { get; set; }
+        public DateTimeOffset ReleaseDate { get; set; }
         [Display(Name = "Search for an artist")]
         public string SearchString { get; set; }
     }
@@ -63,7 +64,8 @@ namespace Aplikacja_muzyczna.Models
         public string Title { get; set; }
         [Display(Name = "Insert date of first release")]
         [DataType(DataType.Date)]
-        public string ReleaseDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTimeOffset ReleaseDate { get; set; }
         [Key]
         public int TrackId { get; set; }
         [Display (Name = "Search for an artist")]

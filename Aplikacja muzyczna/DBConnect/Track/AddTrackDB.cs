@@ -19,11 +19,18 @@ namespace Aplikacja_muzyczna.DBConnect.Track
             };
             string sqlSave = @"INSERT into dbo.Track (ArtistIdFK, ReleaseDate, Title) values (@ArtistIdFK, @ReleaseDate, @Title);";
 
+
+
             int Numberofsaves = DataAccess.SaveData(sqlSave, data);
             if (Numberofsaves == 1)
             {
+                string date = model.ReleaseDate.ToString();
+                date = date.Substring(0, 10);
+                char separator = '.';
+                string[] temp = date.Split(separator);
+                date = temp[2] + "." + temp[1] + "." + temp[0];
                 string sqlLoad = @"SELECT TrackId from dbo.Track where " +
-                " ReleaseDate = '" + model.ReleaseDate + "' AND " +
+                " ReleaseDate = '" + date + "' AND " +
                 " ArtistIdFK = '" + model.ArtistIdFK + "' AND " +
                 " Title = '" + model.Title + "' ;";
                 int AddedId = DataAccess.LoadData<DetailTracks>(sqlLoad).First().TrackId;

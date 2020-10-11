@@ -55,7 +55,7 @@ namespace Aplikacja_muzyczna.Controllers
                         TempData["TrackTitle"] = model.Title;
                     if (model.ReleaseDate != null)
                     {
-                        TempData["TrackDate"] = model.ReleaseDate;
+                        Cookies.RememberDateFromModel(model.ReleaseDate);
                     }
                     return RedirectToAction("SearchArtistAdd", new { searchString = model.SearchString });
 
@@ -101,6 +101,7 @@ namespace Aplikacja_muzyczna.Controllers
             if (model.TrackId != 0)
             {
                 model = DetailTrackDB.DetailTracktoEdit(model.TrackId);
+                Cookies.RememberDateFromModel(model.ReleaseDate);
                 return View(model);
             }
             else

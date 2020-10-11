@@ -20,6 +20,7 @@ namespace Aplikacja_muzyczna.Functions
 
        public static void  CreateDay(DateTimeOffset Birth)
         {
+            RemoveCookie("BirthDate");
             HttpCookie BirthDate = new HttpCookie("BirthDate", "")
             {
                 Value = Misc.DateTimeToString(Birth)
@@ -36,7 +37,16 @@ namespace Aplikacja_muzyczna.Functions
             Cookie.Value = null;
             HttpContext.Current.Response.SetCookie(Cookie);
         }
-
+        public static void RememberDateFromModel (DateTimeOffset Date)
+        {
+            RemoveCookie("RememberDateFromModel");
+            HttpCookie RememberDateFromModel = new HttpCookie("RememberDateFromModel", "")
+            {
+                Value = Misc.DateTimeToString(Date)
+            };
+            RememberDateFromModel.Expires.AddDays(1);
+            HttpContext.Current.Response.SetCookie(RememberDateFromModel);
+        }
 
     }
 }

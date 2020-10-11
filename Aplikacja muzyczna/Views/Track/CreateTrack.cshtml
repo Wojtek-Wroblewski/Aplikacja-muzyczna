@@ -8,10 +8,10 @@
 		<h2>Create</h2>
 --->
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
 <div class="form-horizontal">
 
 
@@ -48,16 +48,20 @@
             </div>
             <div class="col-xs-8">
                 @{var Now = Request.Cookies["DateNow"];}
+                @{var OldDate = Request.Cookies["RememberDateFromModel"];}
+
+                @{ if (OldDate != null)
+                    {
+                        @Html.EditorFor(model => model.ReleaseDate, new { htmlAttributes = new { @class = "form-control", @max = Now.Value, @Value = OldDate.Value } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.ReleaseDate, new { htmlAttributes = new { @class = "form-control", @max = Now.Value, @Value = Now.Value } })
+                    }
+                    @Html.RemoveCookie("RememberDateFromModel");
+                }
 
 
-                @if (TempData["TrackDate"] != null)
-                {
-                    @Html.EditorFor(model => model.ReleaseDate, new { htmlAttributes = new { @class = "form-control", @max = Now.Value, @Value = TempData["TrackDate"] } })
-                }
-                else
-                {
-                    @Html.EditorFor(model => model.ReleaseDate, new { htmlAttributes = new { @class = "form-control", @max = Now.Value, @Value = Now.Value } })
-                }
                 @Html.ValidationMessageFor(model => model.ReleaseDate, "", new { @class = "text-danger" })
             </div>
         </div>
