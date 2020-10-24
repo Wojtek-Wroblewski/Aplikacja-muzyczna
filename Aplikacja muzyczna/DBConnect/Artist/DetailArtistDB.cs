@@ -19,5 +19,7 @@ namespace Aplikacja_muzyczna.DBConnect.Artist
             return DataAccess.LoadData<DetailArtist>(sql).First();
         }
 
+
+
     }
 }

@@ -98,10 +98,33 @@ namespace Aplikacja_muzyczna.Controllers
         }
         public ActionResult EditTrack (EditTrack model)
         {
+            /*TODO 
+             jak wracamy z wyboru nowego artysty to żeby wrócić do miejsca edycjia, a nie listy od nowa, bo w sumie wtedy co klikneliśmy to sobie tak zniknęło i trochę bez sensu :/ */
+            int NewArtist = 0;
+             if (TempData["TrackInEdit"] != null)
+            {
+                model.TrackId = (int)TempData["TrackInEdit"];
+
+                string url = Request.Url.AbsoluteUri;
+                string[] temp = url.Split('=');
+                if (temp.Length > 1)
+                {
+                    NewArtist = (int)double.Parse(temp[1]);
+                }
+            }
             if (model.TrackId != 0)
             {
                 model = DetailTrackDB.DetailTracktoEdit(model.TrackId);
+                if (NewArtist != 0)
+                { 
+                var Artist = DetailArtistDB.DetailFromId(NewArtist);
+                    model.ArtistId = NewArtist;
+                    model.Firstname = Artist.Firstname;
+                    model.Lastname = Artist.Lastname;
+                }
                 Cookies.RememberDateFromModel(model.ReleaseDate);
+                Cookies.Today();
+                TempData["TrackInEdit"] = model.TrackId;
                 return View(model);
             }
             else
@@ -115,6 +138,12 @@ namespace Aplikacja_muzyczna.Controllers
         [HttpPost]
         public ActionResult EditTrack(DetailTrackWithArtist model,string submit, string Search)
         {
+
+            if (TempData["TrackInEdit"] != null)
+            {
+                model.TrackId = (int)TempData["TrackInEdit"];
+            }
+
             if (model.TrackId != 0)
             {
                 switch (submit)
@@ -136,7 +165,8 @@ namespace Aplikacja_muzyczna.Controllers
                         {
                             Cookies.RememberDateFromModel(model.ReleaseDate);
                         }
-                        return RedirectToAction("SearchArtistEdit", new { searchString = model.SearchString });
+                        TempData["TrackInEdit"] = model.TrackId;
+                        return RedirectToAction("SearchArtistEdit", new { searchString = model.SearchString});
                         
                     default:
                         break;

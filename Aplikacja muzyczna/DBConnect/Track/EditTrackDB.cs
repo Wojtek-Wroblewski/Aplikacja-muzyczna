@@ -16,7 +16,7 @@ namespace Aplikacja_muzyczna.DBConnect.Track
         public static DetailTrackWithArtist EditTrack(DetailTrackWithArtist NewModel)
         {
 
-            DetailTrackWithArtist OldModel = DetailTrackDB.DetailFromId(NewModel.ArtistId);
+            DetailTrackWithArtist OldModel = DetailTrackDB.DetailFromId(NewModel.TrackId);
             string sql = TrackFunctions.ModifyTrackSring(NewModel, OldModel);
 
             DataAccess.SaveData(sql, NewModel);

@@ -25,8 +25,7 @@ namespace Aplikacja_muzyczna.DBConnect
                 return cnn.Query<T>(sql).ToList();
             }
         }
-
-
+        
 
         public static int SaveData<T>(string sql, T data)
         {
