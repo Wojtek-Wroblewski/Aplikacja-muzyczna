@@ -19,10 +19,10 @@ namespace Aplikacja_muzyczna.DBConnect.Track
             DetailTrackWithArtist OldModel = DetailTrackDB.DetailFromId(NewModel.TrackId);
             string sql = TrackFunctions.ModifyTrackSring(NewModel, OldModel);
 
-            DataAccess.SaveData(sql, NewModel);
+            DataAccess.SaveData(sql, NewModel);     //działa
 
             DetailTrackWithArtist NewModelfromDB = new DetailTrackWithArtist();
-            NewModelfromDB = DetailTrackDB.DetailFromId(OldModel.ArtistId);
+            NewModelfromDB = DetailTrackDB.DetailFromId(OldModel.TrackId);
 
             return NewModelfromDB;
         }

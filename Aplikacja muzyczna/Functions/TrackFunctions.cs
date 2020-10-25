@@ -28,7 +28,7 @@ namespace Aplikacja_muzyczna.Functions
         {
             {
 
-                string sql = @"UPDATE dbo.Artist Set ";
+                string sql = @"UPDATE dbo.Track Set ";
                 if (NewModel.Title != null)
                     if (NewModel.Title != Oldmodel.Title)
                     {

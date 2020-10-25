@@ -72,6 +72,10 @@ namespace Aplikacja_muzyczna.Controllers
         }
         public ActionResult DetailsTrack (DetailTrackWithArtist model)
         {
+            string url = Request.Url.AbsoluteUri;
+            char separator = '/';
+            string[] temp = url.Split(separator);
+            model.TrackId = (int)double.Parse(temp[temp.Count() - 1]);
             if (model.TrackId != 0)
             {
                 model = DetailTrackDB.DetailFromId(model.TrackId);
@@ -112,6 +116,14 @@ namespace Aplikacja_muzyczna.Controllers
                     NewArtist = (int)double.Parse(temp[1]);
                 }
             }
+
+            /*
+             * 
+             * 
+            http://localhost:58803/Track/EditTrack?TrackId=2137?ArtistId=1488
+            Tak powinien wygladać zawsze link do  edycji track,a bedzie chyabtak łatwiej
+            */
+
             if (model.TrackId != 0)
             {
                 model = DetailTrackDB.DetailTracktoEdit(model.TrackId);
@@ -151,7 +163,9 @@ namespace Aplikacja_muzyczna.Controllers
                     case "Save":
                         if (ModelState.IsValid)
                         {
-                            model = EditTrackDB.EditTrack(model);
+                            model = EditTrackDB.EditTrack(model);//zmapować ten model, na taki, żeby widok chciał go widziec, albo przejśc na strone z detalami, to w sumie dobry pomysł chyba tak zaaraz zrobię
+
+                            return RedirectToAction("DetailsTrack", new { id = model.TrackId});
                         }
                         break;
                     case "Search":
@@ -176,7 +190,7 @@ namespace Aplikacja_muzyczna.Controllers
             {
                 return RedirectToAction("ListTrack");
             }
-            return View();
+            return View(model);
 
         }
         public ActionResult SearchArtistEdit(string searchString)

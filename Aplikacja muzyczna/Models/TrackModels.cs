@@ -44,14 +44,19 @@ namespace Aplikacja_muzyczna.Models
         [Display(Name = "Search for an artist")]
         public string SearchString { get; set; }
     }
-    public class DetailTrackWithArtist: DetailTracks
+    public class DetailTrackWithArtist
     {
         [Display(Name = "Original Artist Firstname")]
         public string Firstname { get; set; }
         [Display(Name = "Original Artist Lastname")]
         public string Lastname { get; set; }
         public int ArtistId { get; set; }
-        
+
+        public int TrackId { get; set; }
+        public  DateTimeOffset ReleaseDate { get; set; }
+        public string SearchString { get; set; }
+        public string Title { get; set; }
+        public int ArtistIdFK { get; set; }
     }
     public class EditTrack
     {

@@ -13,7 +13,7 @@ namespace Aplikacja_muzyczna.DBConnect.Artist
         public static DetailArtist DetailFromId(int ArtistId)
         {
 
-            string sql = @"select * from dbo.Artist where ArtistId=" + ArtistId + ";";
+            string sql = @"select * from dbo.Artist where ArtistId =" + ArtistId + ";";
 
 
             return DataAccess.LoadData<DetailArtist>(sql).First();
