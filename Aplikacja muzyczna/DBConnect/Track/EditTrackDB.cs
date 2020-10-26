@@ -18,8 +18,15 @@ namespace Aplikacja_muzyczna.DBConnect.Track
 
             DetailTrackWithArtist OldModel = DetailTrackDB.DetailFromId(NewModel.TrackId);
             string sql = TrackFunctions.ModifyTrackSring(NewModel, OldModel);
+            if (sql == null)
+            {
+                return NewModel;
+            }
+            else
+            {
 
-            DataAccess.SaveData(sql, NewModel);     //działa
+                DataAccess.SaveData(sql, NewModel);
+            }   
 
             DetailTrackWithArtist NewModelfromDB = new DetailTrackWithArtist();
             NewModelfromDB = DetailTrackDB.DetailFromId(OldModel.TrackId);

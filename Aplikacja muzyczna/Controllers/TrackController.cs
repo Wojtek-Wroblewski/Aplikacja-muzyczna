@@ -72,10 +72,8 @@ namespace Aplikacja_muzyczna.Controllers
         }
         public ActionResult DetailsTrack (DetailTrackWithArtist model)
         {
-            string url = Request.Url.AbsoluteUri;
-            char separator = '/';
-            string[] temp = url.Split(separator);
-            model.TrackId = (int)double.Parse(temp[temp.Count() - 1]);
+            if (Request.QueryString["TrackId"]!=null)
+            model.TrackId = (int)double.Parse(Request.QueryString["TrackId"]);
             if (model.TrackId != 0)
             {
                 model = DetailTrackDB.DetailFromId(model.TrackId);
@@ -104,33 +102,30 @@ namespace Aplikacja_muzyczna.Controllers
         {
             /*TODO 
              jak wracamy z wyboru nowego artysty to żeby wrócić do miejsca edycjia, a nie listy od nowa, bo w sumie wtedy co klikneliśmy to sobie tak zniknęło i trochę bez sensu :/ */
-            int NewArtist = 0;
-             if (TempData["TrackInEdit"] != null)
+            int NewArtist = 0; 
+            if (Request.QueryString["TrackId"]!=null)
+            model.TrackId = (int) double.Parse(Request.QueryString["TrackId"]);
+            if (Request.QueryString["ArtistId"] != null)
+                 NewArtist = (int)double.Parse(Request.QueryString["ArtistId"]);
+
+            if (TempData["TrackInEdit"] != null)
             {
                 model.TrackId = (int)TempData["TrackInEdit"];
-
-                string url = Request.Url.AbsoluteUri;
-                string[] temp = url.Split('=');
-                if (temp.Length > 1)
-                {
-                    NewArtist = (int)double.Parse(temp[1]);
-                }
             }
-
             /*
              * 
              * 
-            http://localhost:58803/Track/EditTrack?TrackId=2137?ArtistId=1488
+            http://localhost:58803/Track/EditTrack?TrackId=2137&ArtistId=1488
             Tak powinien wygladać zawsze link do  edycji track,a bedzie chyabtak łatwiej
             */
 
             if (model.TrackId != 0)
             {
                 model = DetailTrackDB.DetailTracktoEdit(model.TrackId);
-                if (NewArtist != 0)
+
+                if (model.ArtistId == 0)
                 { 
-                var Artist = DetailArtistDB.DetailFromId(NewArtist);
-                    model.ArtistId = NewArtist;
+                var Artist = DetailArtistDB.DetailFromId(0);
                     model.Firstname = Artist.Firstname;
                     model.Lastname = Artist.Lastname;
                 }

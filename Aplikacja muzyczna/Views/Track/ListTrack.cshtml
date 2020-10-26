@@ -41,7 +41,7 @@
             @Html.DisplayFor(modelItem => item.ReleaseDate)
         </td>
         <td style=" padding:15px;">
-            @Html.ActionLink("Edit", "EditTrack", new { TrackId = item.TrackId }) 
+            @Html.ActionLink("Edit", "EditTrack", new { TrackId = item.TrackId, ArtistId = item.ArtistId }) 
             @Html.ActionLink("Details", "DetailsTrack", new { TrackId = item.TrackId }) 
             @Html.ActionLink("Delete", "Delete", new { TrackId = item.TrackId })
         </td>

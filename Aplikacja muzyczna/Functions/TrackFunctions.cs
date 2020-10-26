@@ -27,12 +27,13 @@ namespace Aplikacja_muzyczna.Functions
         public static string ModifyTrackSring(DetailTrackWithArtist NewModel, DetailTrackWithArtist Oldmodel)
         {
             {
-
-                string sql = @"UPDATE dbo.Track Set ";
+                int Numberofchange = 0;
+                string sql = @"UPDATE dbo.Track Set  ";
                 if (NewModel.Title != null)
                     if (NewModel.Title != Oldmodel.Title)
                     {
                         sql += "Title = @Title, ";
+                        Numberofchange++;
                     }
 
 
@@ -40,16 +41,25 @@ namespace Aplikacja_muzyczna.Functions
                     if (NewModel.ReleaseDate != Oldmodel.ReleaseDate)
                     {
                         sql += "ReleaseDate = @ReleaseDate, ";
+                        Numberofchange++;
                     }
 
                 if (NewModel.ArtistIdFK != Oldmodel.ArtistIdFK)
                 {
                     sql += "ArtistIdFK = @ArtistIdFK, ";
+                    Numberofchange++;
                 }
 
                 sql = sql.Remove(sql.Length - 2, 2);
                 sql += "  Where TrackId = @TrackId; ";
-                return sql;
+                if (Numberofchange != 0)
+                {
+                    return sql;
+                }
+                else
+                {
+                    return null;
+                }
             }
 
         }

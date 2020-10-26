@@ -37,37 +37,49 @@ namespace Aplikacja_muzyczna.Functions
 
         public static string ModifyArtistSring(DetailArtist NewModel, DetailArtist Oldmodel)
         {
-
-            string sql = @"UPDATE dbo.Artist Set ";
+            int Numberofchange = 0;
+            string sql = @"UPDATE dbo.Artist Set  ";
             if (NewModel.Firstname != null)
                 if (NewModel.Firstname != Oldmodel.Firstname)
                 {
                     sql += "Firstname = @Firstname, ";
+                    Numberofchange++;
                 }
             
                 if (NewModel.Lastname != Oldmodel.Lastname)
                 {
                     sql += "Lastname = @Lastname, ";
-                }
+                Numberofchange++;
+            }
 
             if (NewModel.Birthdate != null)
                 if (NewModel.Birthdate != Oldmodel.Birthdate)
                 {
                     sql += "Birthdate = @Birthdate, ";
+                    Numberofchange++;
                 }
 
                 if (NewModel.AdditionalInfo != Oldmodel.AdditionalInfo)
                 {
                     sql += "AdditionalInfo = @AdditionalInfo, ";
-                }
+                Numberofchange++;
+            }
             
                 if (NewModel.Photo != Oldmodel.Photo)
                 {
                     sql += "Photo = @Photo, ";
-                }
+                Numberofchange++;
+            }
             sql = sql.Remove(sql.Length - 2, 2);
             sql += "  Where ArtistId = @ArtistId; ";
+            if (Numberofchange != 0)
+            { 
             return sql;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public static Tuple< byte[],string> VerifyPhoto(HttpPostedFileBase File)     
