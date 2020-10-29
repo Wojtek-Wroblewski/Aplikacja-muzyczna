@@ -160,7 +160,7 @@ namespace Aplikacja_muzyczna.Controllers
                         {
                             model = EditTrackDB.EditTrack(model);//zmapować ten model, na taki, żeby widok chciał go widziec, albo przejśc na strone z detalami, to w sumie dobry pomysł chyba tak zaaraz zrobię
 
-                            return RedirectToAction("DetailsTrack", new { id = model.TrackId});
+                            return RedirectToAction("DetailsTrack", new { TrackId = model.TrackId});
                         }
                         break;
                     case "Search":
