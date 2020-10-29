@@ -19,10 +19,8 @@ namespace Aplikacja_muzyczna.Models
         public HttpPostedFileBase File { get; set; }
         public byte[] FileReadytoDB { get; set; }
         public List<AddComment> ListOfComment { get; set; }
-        [Display(Name = "Search by Track")]
-        public string SearchStringTrack { get; set; }
-        [Display(Name = "Search by Artist")]
-        public string SearchStringArtist { get; set; }
+        [Display(Name = "Search Track or Artist")]
+        public string SearchString{ get; set; }
 
     }
 

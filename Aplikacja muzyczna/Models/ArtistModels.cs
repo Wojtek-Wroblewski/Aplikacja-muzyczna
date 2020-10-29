@@ -25,6 +25,7 @@ namespace Aplikacja_muzyczna.Models
         public HttpPostedFileBase File { get; set; }
         [Key]
         public int ArtistId { get; set; }
+        public string AddedBy { get; set; }
 
     }
 

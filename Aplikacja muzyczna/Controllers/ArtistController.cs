@@ -73,7 +73,9 @@ namespace Aplikacja_muzyczna.Controllers
                     }
                     model.Photo = Photo_error.Item1;
                 }
-                
+
+                model.AddedBy = User.Identity.Name.ToString();
+
                 int NewId =  AddArtistDB.SaveArtisttoDB(model);
                 if (NewId !=0)
                 {
