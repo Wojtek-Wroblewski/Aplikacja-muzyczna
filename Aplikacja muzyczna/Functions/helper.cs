@@ -6,6 +6,9 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Aplikacja_muzyczna.Functions;
+using Aplikacja_muzyczna.Models;
+using Aplikacja_muzyczna.DBConnect;
+
 namespace System.Web.Mvc
 {
     public static class Helper
@@ -37,6 +40,18 @@ namespace System.Web.Mvc
             return null;
         }
 
+        public static bool HasRoleToShow (this HtmlHelper html , string UserID, string Role )
+        {
+            string sql = @"Select * from dbo.AspNetUserRoles where userId = '"+UserID+"'";
+
+            //DataAccess.LoadData<DetailArtist>(sql).First();
+            
+            //Aplikacja_muzyczna.DBConnect.DataAccess.LoadData<>
+
+                
+
+            return false;
+        }
 
 
         //public static bool CzyUytkownikMaRole(this HtmlHelper html, string UserName, string rolaString)

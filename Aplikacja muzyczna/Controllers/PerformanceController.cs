@@ -25,8 +25,7 @@ namespace Aplikacja_muzyczna.Controllers
         [HttpPost]
         public ActionResult Create(AddPerformance model)
         {
-
-
+            
 
             return RedirectToAction("Details", new { PerformenceId = model.PerformanceId });
         }

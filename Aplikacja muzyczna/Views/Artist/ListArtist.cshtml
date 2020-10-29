@@ -41,6 +41,7 @@
             @Html.DisplayFor(modelItem => item.AdditionalInfo)
         </td>
         <td style=" padding:15px;">
+
             @Html.ActionLink("Edit", "EditArtist", new { id=item.ArtistId }) 
             @Html.ActionLink("Details", "DetailsArtist", new { id=item.ArtistId }) 
             @Html.ActionLink("Delete", "DeleteArtist", new { id=item.ArtistId })

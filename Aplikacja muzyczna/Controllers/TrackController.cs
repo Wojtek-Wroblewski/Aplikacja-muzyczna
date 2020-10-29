@@ -11,6 +11,7 @@ using Aplikacja_muzyczna.DBConnect.Track;
 
 namespace Aplikacja_muzyczna.Controllers
 {
+    [Authorize]
     public class TrackController : Controller
     {
         // GET: Track
@@ -85,7 +86,7 @@ namespace Aplikacja_muzyczna.Controllers
 
             return View(model);
         }
-        
+        [AllowAnonymous]
         public ActionResult ListTrack (List<DetailTrackWithArtist> List)
         {
             if (List != null)
@@ -110,7 +111,7 @@ namespace Aplikacja_muzyczna.Controllers
 
             if (TempData["TrackInEdit"] != null)
             {
-                model.TrackId = (int)TempData["TrackInEdit"];
+               // model.TrackId = (int)TempData["TrackInEdit"];
             }
             /*
              * 
