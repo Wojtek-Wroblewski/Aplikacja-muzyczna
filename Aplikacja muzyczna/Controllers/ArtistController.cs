@@ -8,6 +8,7 @@ using Aplikacja_muzyczna.DBConnect.Artist;
 using AutoMapper;
 using AutoMapper.Configuration;
 using Aplikacja_muzyczna.Functions;
+using PagedList;
 
 namespace Aplikacja_muzyczna.Controllers
 {
@@ -92,6 +93,7 @@ namespace Aplikacja_muzyczna.Controllers
         }
 
         // GET: Artysta/Edit
+        [Authorize (Roles = "Admin, Mod")]
         public ActionResult EditArtist()
         {
             if (Url.RequestContext.RouteData.Values["id"] != null)
@@ -110,6 +112,7 @@ namespace Aplikacja_muzyczna.Controllers
 
         // POST: Artysta/Edit
         [HttpPost]
+        [Authorize(Roles = "Admin, Mod")]
         public ActionResult EditArtist(DetailArtist model, HttpPostedFileBase file)
         {
             if (Url.RequestContext.RouteData.Values["id"] != null)
@@ -141,6 +144,7 @@ namespace Aplikacja_muzyczna.Controllers
         }
 
         // GET: Artysta/Delete
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteArtist()
         {
             /*TODO
@@ -153,6 +157,7 @@ namespace Aplikacja_muzyczna.Controllers
 
         // POST: Artysta/Delete
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteArtist(AddArtist model)
         {
             /*TODO
@@ -162,16 +167,18 @@ namespace Aplikacja_muzyczna.Controllers
         }
 
         
-        public ActionResult ListArtist()
+        public ActionResult ListArtist(int? Page)
         {
-
             List<DetailArtist> List = new List<DetailArtist>();
             List = ListingArtistDB.SelectAll();
 
-            return View(List);
+
+            Page = 1;
+            int PageSize = 10;
+            int PageNumber = (Page ?? 1);
+
+            return View(List.ToPagedList(PageNumber, PageSize));
         }
-
-
 
 
 

@@ -40,17 +40,21 @@ namespace System.Web.Mvc
             return null;
         }
 
-        public static bool HasRoleToShow (this HtmlHelper html , string UserID, string Role )
+        public static bool HasRoleToDisplay(this HtmlHelper html , string UserID, string Role )
         {
-            string sql = @"Select * from dbo.AspNetUserRoles where userId = '"+UserID+"'";
+            string sql = @"Select Name from dbo.AspNetRoles where Id = " +
+                @"(Select RoleId from dbo.AspNetUserRoles where userId = "+
+                @"(Select Id from dbo.AspNetUsers where Email = '"+UserID+"'))";
 
-            //DataAccess.LoadData<DetailArtist>(sql).First();
+
+            var Roles = Aplikacja_muzyczna.DBConnect.DataAccess.LoadData<Roles>(sql);
+            if (Roles.Count == 0 || Roles.First().Name != Role)
+            { return false; }
+            else if (Roles.First().Name == Role)
+            { return true; }
+            else
+            { return false; }
             
-            //Aplikacja_muzyczna.DBConnect.DataAccess.LoadData<>
-
-                
-
-            return false;
         }
 
 

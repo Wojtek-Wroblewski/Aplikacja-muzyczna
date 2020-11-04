@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "List";
 }
+@{bool HasPremissionstoDisplay = Html.HasRoleToDisplay(User.Identity.Name.ToString(), "Admin");}
+
 
 <h2>List</h2>
 
@@ -26,27 +28,32 @@
         <th style=" padding:15px;"></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr style=" text-align:center;">
-        <td style=" padding:15px;">
-            @Html.DisplayFor(modelItem => item.Lastname)
-        </td>
-        <td style=" padding:15px;">
-            @Html.DisplayFor(modelItem => item.Firstname)
-        </td>
-        <td style=" padding:15px;">
-            @Html.DisplayFor(modelItem => item.Birthdate)
-        </td>
-        <td style=" padding:15px;">
-            @Html.DisplayFor(modelItem => item.AdditionalInfo)
-        </td>
-        <td style=" padding:15px;">
+    @foreach (var item in Model)
+    {
+        <tr style=" text-align:center;">
+            <td style=" padding:15px;">
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </td>
+            <td style=" padding:15px;">
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td style=" padding:15px;">
+                @Html.DisplayFor(modelItem => item.Birthdate)
+            </td>
+            <td style=" padding:15px;">
+                @Html.DisplayFor(modelItem => item.AdditionalInfo)
+            </td>
+            <td style=" padding:15px;">
 
-            @Html.ActionLink("Edit", "EditArtist", new { id=item.ArtistId }) 
-            @Html.ActionLink("Details", "DetailsArtist", new { id=item.ArtistId }) 
-            @Html.ActionLink("Delete", "DeleteArtist", new { id=item.ArtistId })
-        </td>
-    </tr>
-}
+                @{ if (HasPremissionstoDisplay)
+                   {
+                        @Html.ActionLink("Edit", "EditArtist", new { id = item.ArtistId })<br>
+                        @Html.ActionLink("Delete", "DeleteArtist", new { id = item.ArtistId })<br>
+                   }
+                  }
+                @Html.ActionLink("Details", "DetailsArtist", new { id = item.ArtistId })
+            </td>
+        </tr>
+    }
 
 </table>
