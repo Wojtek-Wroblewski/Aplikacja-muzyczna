@@ -1,5 +1,7 @@
-﻿@model IEnumerable<Aplikacja_muzyczna.Models.DetailArtist>
+﻿@*@model IEnumerable<Aplikacja_muzyczna.Models.DetailArtist>*@
 
+@model PagedList.IPagedList<Aplikacja_muzyczna.Models.DetailArtist>
+@using PagedList.Mvc
 @{
     ViewBag.Title = "List";
 }
@@ -14,16 +16,20 @@
 <table class="form-horizontal" style=" text-align:center;">
     <tr style=" text-align:center;">
         <th style=" padding:15px;">
-            @Html.DisplayNameFor(model => model.Lastname)
+            @*@Html.DisplayNameFor(model => model.Lastname)*@
+            Lastname
         </th>
         <th style=" padding:15px;">
-            @Html.DisplayNameFor(model => model.Firstname)
+            @*@Html.DisplayNameFor(model => model.Firstname)*@
+            Firstname
         </th>
         <th style=" padding:15px;">
-            @Html.DisplayNameFor(model => model.Birthdate)
+            @*@Html.DisplayNameFor(model => model.Birthdate)*@
+            Birthdate
         </th>
         <th style=" padding:15px;">
-            @Html.DisplayNameFor(model => model.AdditionalInfo)
+            @*@Html.DisplayNameFor(model => model.AdditionalInfo)*@
+            Additionainfo
         </th>
         <th style=" padding:15px;"></th>
     </tr>
@@ -46,14 +52,21 @@
             <td style=" padding:15px;">
 
                 @{ if (HasPremissionstoDisplay)
-                   {
+                    {
                         @Html.ActionLink("Edit", "EditArtist", new { id = item.ArtistId })<br>
                         @Html.ActionLink("Delete", "DeleteArtist", new { id = item.ArtistId })<br>
-                   }
-                  }
+                    }
+                }
                 @Html.ActionLink("Details", "DetailsArtist", new { id = item.ArtistId })
             </td>
         </tr>
     }
 
 </table>
+
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
