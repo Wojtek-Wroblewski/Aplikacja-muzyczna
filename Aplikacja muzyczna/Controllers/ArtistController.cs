@@ -167,13 +167,48 @@ namespace Aplikacja_muzyczna.Controllers
         }
 
         
-        public ActionResult ListArtist(int? Page)
+        public ActionResult ListArtist(int? Page, string sortOrder )
         {
             List<DetailArtist> List = new List<DetailArtist>();
             List = ListingArtistDB.SelectAll();
+            List<DetailArtist> Sorted = new List<DetailArtist>();
 
+            /*
+            ViewBag.LastNameSortParm = String.IsNullOrEmpty(sortOrder) ? "FirstNameDesc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewBag.FirstNameSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            */
+            ViewBag.LastNameSortParm = String.IsNullOrEmpty(sortOrder) ? "LastNameDesc" : "LastName";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "DateDesc" : "Date";
+            ViewBag.FirstNameSortParm = sortOrder == "FirstName" ? "FirstNameDesc" : "FirstName";
 
-            Page = 1;
+            switch (sortOrder)
+            {
+                case "FirstNameDesc":
+                    List = List.OrderByDescending(x => x.Firstname).ToList();
+                    break;
+                case "FirstName":
+                    List = List.OrderBy(x => x.Firstname).ToList();
+                    break;
+                case "Date":
+                    List = List.OrderBy(x => x.Birthdate).ToList();
+                    break;
+                case "DateDesc":
+                    List = List.OrderByDescending(x => x.Birthdate).ToList();
+                    break;
+
+                case "LastNameDesc":
+                    List = List.OrderByDescending(x => x.Lastname).ToList();
+                    break;
+                case "LastName":
+                    List = List.OrderBy(x => x.Lastname).ToList();
+                    break;
+
+                default:
+                    List = List.OrderBy(x => x.Lastname).ToList();
+                    break;
+            }
+
             int PageSize = 10;
             int PageNumber = (Page ?? 1);
 

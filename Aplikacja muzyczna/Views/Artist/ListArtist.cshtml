@@ -16,20 +16,16 @@
 <table class="form-horizontal" style=" text-align:center;">
     <tr style=" text-align:center;">
         <th style=" padding:15px;">
-            @*@Html.DisplayNameFor(model => model.Lastname)*@
-            Lastname
+            @Html.ActionLink("Last Name", "ListArtist", new { sortOrder = ViewBag.LastNameSortParm })
         </th>
         <th style=" padding:15px;">
-            @*@Html.DisplayNameFor(model => model.Firstname)*@
-            Firstname
+            @Html.ActionLink("First Name", "ListArtist", new { sortOrder = ViewBag.FirstNameSortParm })
         </th>
         <th style=" padding:15px;">
-            @*@Html.DisplayNameFor(model => model.Birthdate)*@
-            Birthdate
+            @Html.ActionLink("Birthdate", "ListArtist", new { sortOrder = ViewBag.DateSortParm })
         </th>
-        <th style=" padding:15px;">
-            @*@Html.DisplayNameFor(model => model.AdditionalInfo)*@
-            Additionainfo
+        <th style=" padding:15px;">  
+            Additiona info
         </th>
         <th style=" padding:15px;"></th>
     </tr>
@@ -68,5 +64,5 @@
 <br />
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("Index",
+@Html.PagedListPager(Model, page => Url.Action("ListArtist",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
