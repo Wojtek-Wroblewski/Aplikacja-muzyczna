@@ -6,7 +6,6 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body style="word-break: break-word;">
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -51,8 +50,22 @@
                         </dig>
                     </li>
 
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Performance ▼
+                        </a>
+                        <dig class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a href="/Performance/CreatePerformance" style="color:#000; margin-left:5px;">Create</a>
+                            <br>
+
+                            <hr style="margin:5px 0px 5px 0px;">
+                            <a href="/Performance/ListPerformance" style="color:#000; margin-left:5px;">List</a>
+                        </dig>
+                    </li>
+
                 </ul>
                 @Html.Partial("_LoginPartial")
+                
             </div>
         </div>
     </div>
@@ -68,6 +81,7 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     @Scripts.Render("~/bundles/dropdown_hover")
+    @Scripts.Render("~/bundles/ckeditor")
 </body>
 </html>
 

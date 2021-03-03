@@ -17,20 +17,50 @@ namespace Aplikacja_muzyczna.Controllers
         {
             return View();
         }
-        public ActionResult Create()
+        public ActionResult CreatePerformance()
         {
 
             return View();
         }
         [HttpPost]
-        public ActionResult Create(AddPerformance model)
+        public ActionResult CreatePerformance(AddPerformance model,  string submit)
         {
-            
 
-            return RedirectToAction("Details", new { PerformenceId = model.PerformanceId });
+            switch (submit)
+            {
+                case "Create":
+                    if (ModelState.IsValid)
+                    {
+                        //int JustaddedTrack = AddTrackDB.SaveTracktoDB(model);
+                        if (true)
+                        {
+                            return RedirectToAction("DetailsTrack", new { TrackId = 2137 });
+                        }
+                        else
+                        {
+                            return RedirectToAction("FailedTrack");
+                        }
+                    }
+                    break;
+                case "Search":
+
+                   // if (model.Title != null)
+                     //   TempData["TrackTitle"] = model.Title;
+                    if (model.UploadDate != null)
+                    {
+                        model.UploadDate = DateTimeOffset.Now;
+                    }
+                    return RedirectToAction("SearchArtistAdd", new { searchString = model.SearchString });
+
+                default:
+                    break;
+            }
+
+
+            return RedirectToAction("DetailsPerformance", new { PerformenceId = model.PerformanceId });
         }
 
-        public ActionResult Details()
+        public ActionResult DetailsPerformance()
         {
 
             return View();

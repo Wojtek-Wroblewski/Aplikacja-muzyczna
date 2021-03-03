@@ -51,6 +51,7 @@ namespace Aplikacja_muzyczna.Controllers
         }
 
         // POST: Artysta/Create
+        [Authorize]
         [HttpPost]
         public ActionResult CreateArtist(Models.AddArtist model, HttpPostedFileBase file)
         {
@@ -66,13 +67,23 @@ namespace Aplikacja_muzyczna.Controllers
             {
                 if (model.File != null)
                 {
-                    Tuple<byte[], string> Photo_error = ArtistFunctions.VerifyPhoto( model.File);
-                    if (Photo_error.Item1 == null)
-                    { 
-                        ModelState.AddModelError("", Photo_error.Item2);
+
+                    /*TODO zamienic tuple na OUT*/
+
+                    byte[] Photo = null;
+                    string Error = null;
+                    //Tuple<byte[], string> Photo_error = ArtistFunctions.VerifyPhoto(model.File);
+                     ArtistFunctions.VerifyPhoto(model.File, out Photo, out Error);
+
+                   // if (Photo_error.Item1 == null)
+                    if (Photo == null)
+                    {
+                        ModelState.AddModelError("", Error);
+                       // ModelState.AddModelError("", Photo_error.Item2);
                         return View();
                     }
-                    model.Photo = Photo_error.Item1;
+                    model.Photo = Photo;
+                    //model.Photo = Photo_error.Item1;
                 }
 
                 model.AddedBy = User.Identity.Name.ToString();
@@ -123,7 +134,7 @@ namespace Aplikacja_muzyczna.Controllers
             if (model.File != null)
             {
                 var Photo_error = new Tuple<byte[], string>(null, null);
-                Photo_error = ArtistFunctions.VerifyPhoto(model.File);
+               // Photo_error = ArtistFunctions.VerifyPhoto(model.File);
                 if (Photo_error.Item2 != null)
                 {
                     ModelState.AddModelError("", Photo_error.Item2);
@@ -167,52 +178,28 @@ namespace Aplikacja_muzyczna.Controllers
         }
 
         
-        public ActionResult ListArtist(int? Page, string sortOrder )
+        public ActionResult ListArtist(int? Page, string sortOrder, List<DetailArtist> List)
         {
-            List<DetailArtist> List = new List<DetailArtist>();
-            List = ListingArtistDB.SelectAll();
-            List<DetailArtist> Sorted = new List<DetailArtist>();
+            int PageSize = 10;
+            int PageNumber = (Page ?? 1);
+            if (List!= null)
+            {
+                return View(List.ToPagedList(PageNumber, PageSize));
+            }
+            else
+            {
 
-            /*
-            ViewBag.LastNameSortParm = String.IsNullOrEmpty(sortOrder) ? "FirstNameDesc" : "";
-            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
-            ViewBag.FirstNameSortParm = sortOrder == "Date" ? "date_desc" : "Date";
-            */
+            List = ListingArtistDB.SelectAll();
+
             ViewBag.LastNameSortParm = String.IsNullOrEmpty(sortOrder) ? "LastNameDesc" : "LastName";
             ViewBag.DateSortParm = sortOrder == "Date" ? "DateDesc" : "Date";
             ViewBag.FirstNameSortParm = sortOrder == "FirstName" ? "FirstNameDesc" : "FirstName";
 
-            switch (sortOrder)
-            {
-                case "FirstNameDesc":
-                    List = List.OrderByDescending(x => x.Firstname).ToList();
-                    break;
-                case "FirstName":
-                    List = List.OrderBy(x => x.Firstname).ToList();
-                    break;
-                case "Date":
-                    List = List.OrderBy(x => x.Birthdate).ToList();
-                    break;
-                case "DateDesc":
-                    List = List.OrderByDescending(x => x.Birthdate).ToList();
-                    break;
-
-                case "LastNameDesc":
-                    List = List.OrderByDescending(x => x.Lastname).ToList();
-                    break;
-                case "LastName":
-                    List = List.OrderBy(x => x.Lastname).ToList();
-                    break;
-
-                default:
-                    List = List.OrderBy(x => x.Lastname).ToList();
-                    break;
-            }
-
-            int PageSize = 10;
-            int PageNumber = (Page ?? 1);
+            List = ArtistFunctions.OrderListArtist(List, sortOrder);
 
             return View(List.ToPagedList(PageNumber, PageSize));
+            }
+
         }
 
 

@@ -14,7 +14,7 @@ namespace Aplikacja_muzyczna.Models
         [Display(Name = "Insert date of performance")]
         [Required(ErrorMessage = "Field can't be empty")]
         [DataType(DataType.Date)]
-        public DateTimeOffset PerformanceDate { get; set; }
+        public DateTimeOffset UploadDate { get; set; }
         [Display(Name = "Choose music file")]
         public HttpPostedFileBase File { get; set; }
         public byte[] FileReadytoDB { get; set; }

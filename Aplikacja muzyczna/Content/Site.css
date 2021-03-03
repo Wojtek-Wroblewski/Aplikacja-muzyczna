@@ -1,8 +1,9 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(0,255,255,1) 100%) no-repeat center center fixed;
-    
+    background: linear-gradient(to bottom, rgba(10,45,87,1) 0%, rgba(95,61,104,1) 100%) no-repeat center center fixed;
+    color: #222222;
+
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -119,4 +120,14 @@ form .horizontal {
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
+}
+
+
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }

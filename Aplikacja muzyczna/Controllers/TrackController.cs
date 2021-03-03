@@ -8,6 +8,7 @@ using Aplikacja_muzyczna.Functions;
 using Aplikacja_muzyczna.Models;
 using Aplikacja_muzyczna.DBConnect.Artist;
 using Aplikacja_muzyczna.DBConnect.Track;
+using PagedList;
 
 namespace Aplikacja_muzyczna.Controllers
 {
@@ -34,7 +35,7 @@ namespace Aplikacja_muzyczna.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateTrack(AddTracks model, string submit, string Search)
+        public ActionResult CreateTrack(AddTracks model, string submit)
         {
             switch (submit)
             {
@@ -87,16 +88,25 @@ namespace Aplikacja_muzyczna.Controllers
             return View(model);
         }
         [AllowAnonymous]
-        public ActionResult ListTrack (List<DetailTrackWithArtist> List)
+        public ActionResult ListTrack (List<DetailTrackWithArtist> List, int? Page, string sortOrder)
         {
+            int PageSize = 10;
+            int PageNumber = (Page ?? 1);
             if (List != null)
             {
-                return View(List);
+                return View(List.ToPagedList(PageNumber, PageSize));
             }
             else
             {
                 List = DetailTrackDB.ListAll();
-                return View(List);
+
+
+                ViewBag.TitleSortParm = String.IsNullOrEmpty(sortOrder) ? "TitleDesc" : "Title";
+                ViewBag.FirstNameSortParm = sortOrder == "FirstName" ? "FirstNameDesc" : "FirstName";
+                ViewBag.LastNameSortParm = sortOrder == "LastName" ? "LastNameDesc" : "LastName";
+                ViewBag.DateSortParm = sortOrder == "Date" ? "DateDesc" : "Date";
+                List = TrackFunctions.OrderListTrack(List, sortOrder);
+                return View(List.ToPagedList(PageNumber, PageSize));
             }
         }
         public ActionResult EditTrack (EditTrack model)

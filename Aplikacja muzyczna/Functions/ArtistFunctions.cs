@@ -82,10 +82,12 @@ namespace Aplikacja_muzyczna.Functions
             }
         }
 
-        public static Tuple< byte[],string> VerifyPhoto(HttpPostedFileBase File)     
+        public static void VerifyPhoto(HttpPostedFileBase File, out byte[] Photo, out string Error)
         {
-            byte[] Photo = null;
-            string Error = null;
+       // public static Tuple< byte[],string> VerifyPhoto(HttpPostedFileBase File)     
+       // {
+            //byte[] Photo = null;
+            //string Error = null;
             Photo = ArtistFunctions.PhotoBytefromfile(File);
             if (Photo.Length == 1)
             {
@@ -102,8 +104,9 @@ namespace Aplikacja_muzyczna.Functions
             {
                 Error = "Something went wrong";
             }
+            Error = "OK";
 
-            return new Tuple<byte[],string>(Photo,Error);
+            // return new Tuple<byte[],string>(Photo,Error);
 
         }
 
@@ -142,6 +145,37 @@ namespace Aplikacja_muzyczna.Functions
             return sql;
         }
 
- 
+        public static List<DetailArtist> OrderListArtist (List<DetailArtist> List, string sortOrder )
+        {
+            switch (sortOrder)
+            {
+                case "FirstNameDesc":
+                    List = List.OrderByDescending(x => x.Firstname).ToList();
+                    break;
+                case "FirstName":
+                    List = List.OrderBy(x => x.Firstname).ToList();
+                    break;
+                case "Date":
+                    List = List.OrderBy(x => x.Birthdate).ToList();
+                    break;
+                case "DateDesc":
+                    List = List.OrderByDescending(x => x.Birthdate).ToList();
+                    break;
+
+                case "LastNameDesc":
+                    List = List.OrderByDescending(x => x.Lastname).ToList();
+                    break;
+                case "LastName":
+                    List = List.OrderBy(x => x.Lastname).ToList();
+                    break;
+                default:
+                    List = List.OrderBy(x => x.Lastname).ToList();
+                    break;
+            }
+            return List;
+
+        }
+
+
     }
 }

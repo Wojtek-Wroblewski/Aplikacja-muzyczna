@@ -1,8 +1,11 @@
-﻿@model IEnumerable<Aplikacja_muzyczna.Models.DetailTrackWithArtist>
-
+﻿
+@model PagedList.IPagedList<Aplikacja_muzyczna.Models.DetailTrackWithArtist>
+@using PagedList.Mvc
 @{
     ViewBag.Title = "ListTrack";
 }
+
+@{bool HasPremissionstoDisplay = Html.HasRoleToDisplay(User.Identity.Name.ToString(), "Admin");}
 
 <h2>ListTrack</h2>
 
@@ -12,40 +15,51 @@
 <table class="form-horizontal" style=" text-align:center;">
     <tr style=" text-align:center;">
         <th style=" padding:15px;">
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.ActionLink("Title", "ListTrack", new { sortOrder = ViewBag.TitleSortParm })
         </th>
         <th style=" padding:15px;">
-            @Html.DisplayNameFor(model => model.Firstname)
+            @Html.ActionLink("First Name", "ListTrack", new { sortOrder = ViewBag.FirstNameSortParm })
         </th>
         <th style=" padding:15px;">
-            @Html.DisplayNameFor(model => model.Lastname)
+            @Html.ActionLink("Last Name", "ListTrack", new { sortOrder = ViewBag.LastNameSortParm })
         </th>
         <th style=" padding:15px;">
-            @Html.DisplayNameFor(model => model.ReleaseDate)
+            @Html.ActionLink("ReleaseDate", "ListTrack", new { sortOrder = ViewBag.DateSortParm })
         </th>
         <th style=" padding:15px;"></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr style=" text-align:center;">
-        <td style=" padding:15px;">
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td style=" padding:15px;">
-            @Html.DisplayFor(modelItem => item.Firstname)
-        </td>
-        <td style=" padding:15px;">
-            @Html.DisplayFor(modelItem => item.Lastname)
-        </td>
-        <td style=" padding:15px;">
-            @Html.DisplayFor(modelItem => item.ReleaseDate)
-        </td>
-        <td style=" padding:15px;">
-            @Html.ActionLink("Edit", "EditTrack", new { TrackId = item.TrackId, ArtistId = item.ArtistId }) 
-            @Html.ActionLink("Details", "DetailsTrack", new { TrackId = item.TrackId }) 
-            @Html.ActionLink("Delete", "Delete", new { TrackId = item.TrackId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr style=" text-align:center;">
+            <td style=" padding:15px;">
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td style=" padding:15px;">
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td style=" padding:15px;">
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </td>
+            <td style=" padding:15px;">
+                @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </td>
+            <td style=" padding:15px;">
+                @{ if (HasPremissionstoDisplay)
+                    {
+                        @Html.ActionLink("Edit", "EditTrack", new { TrackId = item.TrackId, ArtistId = item.ArtistId })
+                        @Html.ActionLink("Delete", "DeleteTrack", new { TrackId = item.TrackId })
+                    }
+                }
+                @Html.ActionLink("Details", "DetailsTrack", new { TrackId = item.TrackId })
+            </td>
+        </tr>
+    }
 
 </table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("ListTrack",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

@@ -63,5 +63,42 @@ namespace Aplikacja_muzyczna.Functions
             }
 
         }
+
+        public static List <DetailTrackWithArtist> OrderListTrack (List<DetailTrackWithArtist> List, string sortOrder)
+        {
+
+            switch (sortOrder)
+            {
+                case "FirstNameDesc":
+                    List = List.OrderByDescending(x => x.Firstname).ToList();
+                    break;
+                case "FirstName":
+                    List = List.OrderBy(x => x.Firstname).ToList();
+                    break;
+                case "Date":
+                    List = List.OrderBy(x => x.ReleaseDate).ToList();
+                    break;
+                case "DateDesc":
+                    List = List.OrderByDescending(x => x.ReleaseDate).ToList();
+                    break;
+                case "LastNameDesc":
+                    List = List.OrderByDescending(x => x.Lastname).ToList();
+                    break;
+                case "LastName":
+                    List = List.OrderBy(x => x.Lastname).ToList();
+                    break;
+                case "TitleDesc":
+                    List = List.OrderByDescending(x => x.Title).ToList();
+                    break;
+                case "Title":
+                    List = List.OrderBy(x => x.Title).ToList();
+                    break;
+                default:
+                    List = List.OrderBy(x => x.Title).ToList();
+                    break;
+            }
+            return List;
+
+        }
     }
 }

@@ -32,6 +32,13 @@ namespace Aplikacja_muzyczna
 
             bundles.Add(new ScriptBundle("~/bundles/edit_field").Include(
                 "~/Scripts/Custom/edit_field.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/ckeditor").Include(
+                "~/Scripts/ckeditor/ckeditor.js"));
+
+
+            
+
         }
     }
 }
